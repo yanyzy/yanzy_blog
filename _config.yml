@@ -80,4 +80,4 @@ theme: next
 deploy:
   type: git
   repo: git@github.com:yanyzy/yanzy_blog.git
-  branch: gh-pages
+  branch: master
