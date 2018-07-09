@@ -2,7 +2,7 @@
 title: springboot学习笔记（一）
 date: 2018-07-09 21:17:10
 tags: springboot
-description: springboot学习笔记，本篇包含 微服务概念，springboot入门，过滤器，拦截器，aop
+description: 本篇包含 微服务概念，springboot入门，过滤器，拦截器，aop
 ---
 
 本系列所有源码可以在[github](https://github.com/yanyzy/spring-boot-practice.git)获取
