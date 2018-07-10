@@ -99,24 +99,25 @@
 
 
 
-  <meta name="description" content="那么我要开始写博客咯~">
+  <meta name="description" content="判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。">
+<meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/04/16/hello-world/index.html">
+<meta property="og:title" content="9_回文数_PalindromeNumber">
+<meta property="og:url" content="http://yoursite.com/2018/07/10/9-回文数-PalindromeNumber/index.html">
 <meta property="og:site_name" content="我是zhyee">
-<meta property="og:description" content="那么我要开始写博客咯~">
+<meta property="og:description" content="判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-31T07:39:32.119Z">
+<meta property="og:updated_time" content="2018-07-10T16:01:06.092Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="那么我要开始写博客咯~">
+<meta name="twitter:title" content="9_回文数_PalindromeNumber">
+<meta name="twitter:description" content="判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/16/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/10/9-回文数-PalindromeNumber/"/>
 
 
 
@@ -126,7 +127,7 @@
   };
 </script>
 
-  <title>Hello World | 我是zhyee</title>
+  <title>9_回文数_PalindromeNumber | 我是zhyee</title>
   
 
 
@@ -282,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/16/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/9-回文数-PalindromeNumber/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhyee">
@@ -299,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World
+          <h1 class="post-title" itemprop="name headline">9_回文数_PalindromeNumber
               
             
           </h1>
@@ -324,7 +325,7 @@
                 
               
 
-              <time title="Created: 2018-04-16 11:54:25" itemprop="dateCreated datePublished" datetime="2018-04-16T11:54:25+08:00">2018-04-16</time>
+              <time title="Created: 2018-07-10 21:56:34" itemprop="dateCreated datePublished" datetime="2018-07-10T21:56:34+08:00">2018-07-10</time>
             
 
             
@@ -341,7 +342,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-31 15:39:32" itemprop="dateModified" datetime="2018-05-31T15:39:32+08:00">2018-05-31</time>
+                <time title="Modified: 2018-07-11 00:01:06" itemprop="dateModified" datetime="2018-07-11T00:01:06+08:00">2018-07-11</time>
               
             
           </span>
@@ -360,6 +361,8 @@
           
 
           
+              <div class="post-description">判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</div>
+          
 
         </div>
       </header>
@@ -374,7 +377,22 @@
       
 
       
-        <p>那么我要开始写博客咯~</p>
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<p>示例 1:</p>
+<blockquote>
+<p>输入: 121<br>输出: true</p>
+</blockquote>
+<p>示例 2:</p>
+<blockquote>
+<p>输入: -121<br>输出: false<br>解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</p>
+</blockquote>
+<p>示例 3:</p>
+<blockquote>
+<p>输入: 10<br>输出: false<br>解释: 从右向左读, 为 01 。因此它不是一个回文数。</p>
+</blockquote>
+<p>进阶:<br>你能不将整数转为字符串来解决这个问题吗？</p>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>解决问题的思路是将传入的数据进行反转，当然如果是字符串的话，反转会比较方便。但是一味地用字符串或者list解题未免太不程序员了，那么我们就用计算的方法吧。要想将数字反转，按照思路我们要将数字最右边的数据一个一个拿出来，并且放在最左边。最主要的“拿出来”这一步，可以用取模运算（这里不考虑负数，所以不讨论是取模还是求余），”拿出来“后将原始数据除以10，就可以得到下一次需要被操作的数据了。下面是java代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> b = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> z = x;</span><br><span class="line">        <span class="keyword">while</span> (z &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            y = y * <span class="number">10</span> + z % <span class="number">10</span>;</span><br><span class="line">            z = z / <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (y == x) &#123;</span><br><span class="line">            b = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> b;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://leetcode-cn.com/problems/palindrome-number/description/" target="_blank" rel="noopener">问题链接</a></p>
 
       
     </div>
@@ -393,6 +411,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          
+        </div>
+      
 
       
       
@@ -402,14 +426,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/07/10/springcloud学习笔记（一）/" rel="next" title="springcloud学习笔记（一）">
+                <i class="fa fa-chevron-left"></i> springcloud学习笔记（一）
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/31/HTTP入门（一）/" rel="prev" title="HTTP入门（一）">
-                HTTP入门（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/10/14-最长公共前缀-LongestCommonPrefix/" rel="prev" title="14_最长公共前缀_LongestCommonPrefix">
+                14_最长公共前缀_LongestCommonPrefix <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -459,8 +487,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -558,6 +595,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
