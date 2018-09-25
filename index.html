@@ -279,6 +279,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/25/初识CAS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhyee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我是zhyee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/25/初识CAS/" itemprop="url">
+                  初识CAS
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-25 11:17:09 / Modified: 15:07:44" itemprop="dateCreated datePublished" datetime="2018-09-25T11:17:09+08:00">2018-09-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>对于一个java小白来说，聊到并发问题，为了保证数据一致性，我首先会想到加锁—— java 中的 Synchronized 关键字。但是这个想法被大神严格否定了，因为 Synchronized 是一种悲观锁，存在一定的性能问题。</p>
+<h1 id="锁机制"><a href="#锁机制" class="headerlink" title="锁机制"></a>锁机制</h1><p>java中的锁机制是为了实现数据一致的一种方式，在并发的情况下，共享资源可能同时被多个线程使用。假设 A 线程和 B 线程同时获取到变量 i，并对其加 1 ，那么最终放回内存的值，很可能是 i+1 而不是正确的 i+2。所以，我们需要对这部分操作加锁，同一时间仅允许一个线程对资源进行操作。</p>
+<h3 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h3><p>从字面上意思来看，悲观地认为一定会与其他线程产生冲突，那么首先将资源加锁，只能自己进行操作，操作完成之后释放锁。悲观锁会带来一定的性能问题，由于cpu中不停地进行线程调度，当一个线程获取不到资源，会被挂起，让出cpu，等到资源可用时才被唤醒，这个过程存在很大的开销。</p>
+<h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>乐观地认为不会与其他线程产生冲突，首先获取资源，但是在执行修改时，会先判断有没有被其余线程更改过。如果发生冲突，则不对资源进行修改，同时不让出cpu，不断进行重试，直到修改成功。</p>
+<h1 id="CAS简述"><a href="#CAS简述" class="headerlink" title="CAS简述"></a>CAS简述</h1><p>CAS即比较并交换（Compare And Swap），是一种乐观锁的实现。CAS概念中有3个参数：</p>
+<ul>
+<li>内存地址 V</li>
+<li>最后一次获取到的内存值 A (old value)</li>
+<li>待写入内存的值 B （new value）</li>
+</ul>
+<p>CAS认为，地址 V 中的值应当与 A 一致，如果确认一致，那么写入在 V 中写入 B ，反之，不执行写入操作，并认为操作失败。</p>
+<h1 id="Unsafe类"><a href="#Unsafe类" class="headerlink" title="Unsafe类"></a>Unsafe类</h1><p>java 中的 CAS 操作使用  jdk 提供的 Unsafe 类，在 rt.jar 中。java 不能直接访问底层操作系统，需要通过 native 方法来访问。Unsafe 类包含了许多硬件级别的原子操作，包括对内存的读写等。这些操作主要用于 java 的核心类库使用，而不是标准用户。Unsafe 提供了三个方法实现 CAS 操作，分别用于三种不同的数据类型：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">compareAndSwapObject</span><span class="params">(Object var1, <span class="keyword">long</span> var2, Object var4, Object var5)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">compareAndSwapInt</span><span class="params">(Object var1, <span class="keyword">long</span> var2, <span class="keyword">int</span> var4, <span class="keyword">int</span> var5)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">compareAndSwapLong</span><span class="params">(Object var1, <span class="keyword">long</span> var2, <span class="keyword">long</span> var4, <span class="keyword">long</span> var6)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>我们可以使用这些方法，实现一个基于 CAS 的计数器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CASCounter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Unsafe unsafe;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">long</span> counter = <span class="number">0</span>;<span class="comment">//counter声明为volatile类型，多个线程共享</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> offset;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过反射获取 Unsafe 对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalAccessException</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> NoSuchFieldException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Unsafe <span class="title">getUnsafe</span><span class="params">()</span> <span class="keyword">throws</span> IllegalAccessException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Field f = Unsafe.class.getDeclaredField(<span class="string">"theUnsafe"</span>);</span><br><span class="line">        f.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">return</span> (Unsafe) f.get(<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CASCounter</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        unsafe = getUnsafe();</span><br><span class="line">        offset = unsafe.objectFieldOffset(CASCounter.class.getDeclaredField(<span class="string">"counter"</span>));</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> before = counter;</span><br><span class="line">        <span class="keyword">while</span> (!unsafe.compareAndSwapLong(<span class="keyword">this</span>, offset, before, before + <span class="number">1</span>)) &#123;</span><br><span class="line">            before = counter;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getCounter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> counter;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码中，首先使用反射获取到 Unsafe 对象（直接使用 Unsafe.getUnsafe() 会抛出 SecurityException 异常）。在CASCounter 的构造方法中，传入 Unsafe 对象与 counter 字段的内存地址。执行增加操作时，首先将 counter 赋予 before，再通过 compareAndSwapLong 方法，比较 offset 地址的值是否与我们所获取的一致，不一致则返回 false，并更新 before 值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> NUM_OF_THREADS = <span class="number">5</span>;</span><br><span class="line">       <span class="keyword">int</span> NUM_OF_INCREMENTS = <span class="number">5</span>;</span><br><span class="line">       ExecutorService service = Executors.newFixedThreadPool(NUM_OF_THREADS);</span><br><span class="line">       CASCounter casCounter = <span class="keyword">new</span> CASCounter();</span><br><span class="line"></span><br><span class="line">       List&lt;Future&gt; futures = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">       IntStream.rangeClosed(<span class="number">0</span>, NUM_OF_THREADS - <span class="number">1</span>)</span><br><span class="line">               .forEach(i -&gt; &#123;</span><br><span class="line">                   Future future = service.submit(() -&gt; IntStream</span><br><span class="line">                           .rangeClosed(<span class="number">0</span>, NUM_OF_INCREMENTS - <span class="number">1</span>)</span><br><span class="line">                           .forEach(j -&gt; &#123;</span><br><span class="line">                               casCounter.increment();</span><br><span class="line">                           &#125;));</span><br><span class="line">                   futures.add(future);</span><br><span class="line">               &#125;);</span><br><span class="line"></span><br><span class="line">       futures.forEach(future -&gt; &#123;</span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">               future.get();</span><br><span class="line">           &#125; <span class="keyword">catch</span> (InterruptedException | ExecutionException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line"></span><br><span class="line">       assertEquals(NUM_OF_INCREMENTS * NUM_OF_THREADS, casCounter.getCounter());</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>测试代码中，启动 5 个线程，每个线程对计数器执行 5 次操作。使用 Future 等待线程执行完毕。断言计数器执行的次数与我们预期的次数相等。</p>
+<h1 id="JAVA-源码中的应用"><a href="#JAVA-源码中的应用" class="headerlink" title="JAVA 源码中的应用"></a>JAVA 源码中的应用</h1><p>java.concurrent 包中的许多方法，都是基于 Unsafe 类的 compareAndSwap</p>
+<p><a href="https://imgchr.com/i/iKa7dI" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2018/09/25/iKa7dI.md.png" alt="iKa7dI.md.png"></a></p>
+<p>比如 ConcurrentHashMap 中的 addCount 方法等（只展示了部分源码）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">addCount</span><span class="params">(<span class="keyword">long</span> x, <span class="keyword">int</span> check)</span> </span>&#123;</span><br><span class="line">        CounterCell[] as; <span class="keyword">long</span> b, s;</span><br><span class="line">        <span class="keyword">if</span> ((as = counterCells) != <span class="keyword">null</span> ||</span><br><span class="line">            !U.compareAndSwapLong(<span class="keyword">this</span>, BASECOUNT, b = baseCount, s = b + x)) &#123;</span><br><span class="line">            CounterCell a; <span class="keyword">long</span> v; <span class="keyword">int</span> m;</span><br><span class="line">            <span class="keyword">boolean</span> uncontended = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">if</span> (as == <span class="keyword">null</span> || (m = as.length - <span class="number">1</span>) &lt; <span class="number">0</span> ||</span><br><span class="line">                (a = as[ThreadLocalRandom.getProbe() &amp; m]) == <span class="keyword">null</span> ||</span><br><span class="line">                !(uncontended =</span><br><span class="line">                  U.compareAndSwapLong(a, CELLVALUE, v = a.value, v + x))) &#123;</span><br><span class="line">                fullAddCount(x, uncontended);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (check &lt;= <span class="number">1</span>)</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            s = sumCount();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ···</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>由于 CAS 的操作能够避免线程阻塞，在编码中的应用十分常见。同时，对于这种思维的学习，也有利于理解更多核心代码。</p>
+<h1 id="CAS-缺点"><a href="#CAS-缺点" class="headerlink" title="CAS 缺点"></a>CAS 缺点</h1><p>学习的过程中，了解到一些 CAS 的缺点，不过可能在真正应用的时候才能有深刻理解吧。</p>
+<ul>
+<li>ABA 问题。即一个值从 A 变为 B 再变为 A，而 CAS 操作不能发现这个值发生了变化。解决思路可以引入版本号概念，每一次修改都设置版本号。</li>
+<li>只能操作一个共享变量。根据提供的本地方法可以看到，使用 CAS 一次只能操作一个共享变量。</li>
+<li>循环时间所带来的开销。由于 CAS 会不断重试直到操作成功，过程中无限循环，如果线程数众多，并且长时间执行不成功，会给 CPU 带来大量的执行开销。</li>
+</ul>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a href="https://howtodoinjava.com/java/multi-threading/compare-and-swap-cas-algorithm/" target="_blank" rel="noopener">Java Compare and Swap Example – CAS Algorithm</a></p>
+<p><a href="https://www.baeldung.com/java-unsafe" target="_blank" rel="noopener">Guide to <em>sun.misc.Unsafe</em></a></p>
+<p><a href="https://mritd.me/2017/02/06/java-cas/" target="_blank" rel="noopener">Java CAS 理解</a></p>
+<p><a href="http://zl198751.iteye.com/blog/1848575" target="_blank" rel="noopener">JAVA CAS原理深度分析</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/二分法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -342,7 +514,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-09-20 12:05:33" itemprop="dateModified" datetime="2018-09-20T12:05:33+08:00">2018-09-20</time>
+                <time title="Modified: 2018-09-25 15:22:25" itemprop="dateModified" datetime="2018-09-25T15:22:25+08:00">2018-09-25</time>
               
             
           </span>
@@ -1668,162 +1840,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/06/代理模式的实现/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhyee">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我是zhyee">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/06/代理模式的实现/" itemprop="url">
-                  代理模式的实现
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-06 21:58:36" itemprop="dateCreated datePublished" datetime="2018-07-06T21:58:36+08:00">2018-07-06</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-10 10:58:03" itemprop="dateModified" datetime="2018-07-10T10:58:03+08:00">2018-07-10</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          代理模式的概念，实现
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/06/代理模式的实现/">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1875,7 +1891,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

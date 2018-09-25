@@ -107,10 +107,12 @@
 <meta property="og:site_name" content="我是zhyee">
 <meta property="og:description" content="二分法的学习笔记以及clojure实现">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-20T04:05:33.989Z">
+<meta property="og:image" content="https://s1.ax1x.com/2018/09/25/iKwujg.png">
+<meta property="og:updated_time" content="2018-09-25T07:22:25.609Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="函数式算法练习_二分法">
 <meta name="twitter:description" content="二分法的学习笔记以及clojure实现">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/09/25/iKwujg.png">
 
 
 
@@ -342,7 +344,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-09-20 12:05:33" itemprop="dateModified" datetime="2018-09-20T12:05:33+08:00">2018-09-20</time>
+                <time title="Modified: 2018-09-25 15:22:25" itemprop="dateModified" datetime="2018-09-25T15:22:25+08:00">2018-09-25</time>
               
             
           </span>
@@ -379,7 +381,8 @@
       
         <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>给定 n 个元素，这些元素是有序的（假定为升序），从中查找特定元素 x 。</p>
 <h4 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h4><p>将有序序列分解为规模大致相等的两部分，然后取中间元素与特定元素进行比较，如果与中间元素相等，则查找成功，算法终止；如果比中间元素小，则在序列的前半部分查找（重复分解并查找的操作）；否则，在序列的后半部分查找（重复分解并查找的操作）。</p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> binary-search [items x]</span><br><span class="line">  (<span class="name"><span class="builtin-name">let</span></span> [items' (<span class="name"><span class="builtin-name">sort</span></span> items)]<span class="comment">;将所得数组排序</span></span><br><span class="line">    (<span class="name"><span class="builtin-name">letfn</span></span> [(<span class="name">binary-search'</span> [items' x]</span><br><span class="line">              (<span class="name"><span class="builtin-name">cond</span></span> (<span class="name"><span class="builtin-name">empty?</span></span> items') <span class="number">-1</span>                      <span class="comment">;未查询到</span></span><br><span class="line">                    (<span class="name"><span class="builtin-name">=</span></span> x (<span class="name"><span class="builtin-name">first</span></span> (<span class="name"><span class="builtin-name">drop</span></span> (/ (<span class="name"><span class="builtin-name">count</span></span> items') <span class="number">2</span>) items'))) <span class="number">1</span> <span class="comment">;判断与中间元素是否相等</span></span><br><span class="line">                    <span class="symbol">:else</span>  (<span class="name"><span class="builtin-name">cond</span></span> (<span class="name"><span class="builtin-name">=</span></span> <span class="number">1</span> (<span class="name"><span class="builtin-name">count</span></span> items')) <span class="number">-1</span></span><br><span class="line">                                 (<span class="name"><span class="builtin-name">&gt;</span></span> x (<span class="name"><span class="builtin-name">first</span></span> (<span class="name"><span class="builtin-name">drop</span></span> (/ (<span class="name"><span class="builtin-name">count</span></span> items') <span class="number">2</span>) items')))(<span class="name">binary-search'</span> (<span class="name"><span class="builtin-name">drop</span></span> (/ (<span class="name"><span class="builtin-name">count</span></span> items') <span class="number">2</span>) items') x)<span class="comment">; 大于中间元素</span></span><br><span class="line">                                 <span class="symbol">:else</span> (<span class="name">binary-search'</span> (<span class="name"><span class="builtin-name">take</span></span> (/ (<span class="name"><span class="builtin-name">count</span></span> items') <span class="number">2</span>) items') x))))] <span class="comment">; 小于中间元素</span></span><br><span class="line">      (<span class="name">binary-search'</span> items' x))))</span><br><span class="line"></span><br><span class="line">(<span class="name">println</span> (<span class="name">binary-search</span> '(<span class="number">2</span> <span class="number">5</span> <span class="number">8</span> <span class="number">19</span> <span class="number">40</span> <span class="number">3</span>) <span class="number">9</span>))</span><br></pre></td></tr></table></figure>
+<h1 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h1><p><img src="https://s1.ax1x.com/2018/09/25/iKwujg.png" alt="iKwujg.png"></p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> binary-search [items x]</span><br><span class="line">  (<span class="name"><span class="builtin-name">let</span></span> [items' (<span class="name"><span class="builtin-name">sort</span></span> items)]</span><br><span class="line">    (<span class="name"><span class="builtin-name">letfn</span></span> [(<span class="name">binary-search'</span> [items' x]</span><br><span class="line">              (<span class="name"><span class="builtin-name">cond</span></span> (<span class="name"><span class="builtin-name">empty?</span></span> items') <span class="number">-1</span></span><br><span class="line">                    (<span class="name"><span class="builtin-name">=</span></span> x (<span class="name"><span class="builtin-name">first</span></span> (<span class="name"><span class="builtin-name">drop</span></span> (/ (<span class="name"><span class="builtin-name">count</span></span> items') <span class="number">2</span>) items'))) <span class="number">1</span> </span><br><span class="line">                    <span class="symbol">:else</span>  (<span class="name"><span class="builtin-name">cond</span></span> (<span class="name"><span class="builtin-name">=</span></span> <span class="number">1</span> (<span class="name"><span class="builtin-name">count</span></span> items')) <span class="number">-1</span></span><br><span class="line">                                 (<span class="name"><span class="builtin-name">&gt;</span></span> x (<span class="name"><span class="builtin-name">first</span></span> (<span class="name"><span class="builtin-name">drop</span></span> (/ (<span class="name"><span class="builtin-name">count</span></span> items') <span class="number">2</span>) items')))(<span class="name">binary-search'</span> (<span class="name"><span class="builtin-name">drop</span></span> (/ (<span class="name"><span class="builtin-name">count</span></span> items') <span class="number">2</span>) items') x)</span><br><span class="line">                                 <span class="symbol">:else</span> (<span class="name">binary-search'</span> (<span class="name"><span class="builtin-name">take</span></span> (/ (<span class="name"><span class="builtin-name">count</span></span> items') <span class="number">2</span>) items') x))))]</span><br><span class="line">      (<span class="name">binary-search'</span> items' x))))</span><br><span class="line"></span><br><span class="line">(<span class="name">println</span> (<span class="name">binary-search</span> '(<span class="number">2</span> <span class="number">5</span> <span class="number">8</span> <span class="number">19</span> <span class="number">40</span> <span class="number">3</span>) <span class="number">9</span>))</span><br></pre></td></tr></table></figure>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>《趣学算法》</p>
 
       
@@ -423,6 +426,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/25/初识CAS/" rel="prev" title="初识CAS">
+                初识CAS <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -500,7 +507,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -591,7 +598,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法思想"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">算法思想</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">2.1.</span> <span class="nav-text">参考文档</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法思想"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">算法思想</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图解"><span class="nav-number">2.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">3.1.</span> <span class="nav-text">参考文档</span></a></li></ol></li></ol></div>
             
 
           </div>
