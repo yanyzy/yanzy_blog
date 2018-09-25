@@ -99,18 +99,18 @@
 
 
 
-  <meta name="description" content="对于一个java小白来说，聊到并发问题，为了保证数据一致性，我首先会想到加锁—— java 中的 Synchronized 关键字。但是这个想法被大神严格否定了，因为 Synchronized 是一种悲观锁，存在一定的性能问题。 锁机制java中的锁机制是为了实现数据一致的一种方式，在并发的情况下，共享资源可能同时被多个线程使用。假设 A 线程和 B 线程同时获取到变量 i，并对其加 1 ，那么最">
+  <meta name="description" content="CAS概念与JAVA实现">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初识CAS">
 <meta property="og:url" content="http://yoursite.com/2018/09/25/初识CAS/index.html">
 <meta property="og:site_name" content="我是zhyee">
-<meta property="og:description" content="对于一个java小白来说，聊到并发问题，为了保证数据一致性，我首先会想到加锁—— java 中的 Synchronized 关键字。但是这个想法被大神严格否定了，因为 Synchronized 是一种悲观锁，存在一定的性能问题。 锁机制java中的锁机制是为了实现数据一致的一种方式，在并发的情况下，共享资源可能同时被多个线程使用。假设 A 线程和 B 线程同时获取到变量 i，并对其加 1 ，那么最">
+<meta property="og:description" content="CAS概念与JAVA实现">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s1.ax1x.com/2018/09/25/iKa7dI.md.png">
-<meta property="og:updated_time" content="2018-09-25T07:07:44.764Z">
+<meta property="og:updated_time" content="2018-09-25T07:26:14.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识CAS">
-<meta name="twitter:description" content="对于一个java小白来说，聊到并发问题，为了保证数据一致性，我首先会想到加锁—— java 中的 Synchronized 关键字。但是这个想法被大神严格否定了，因为 Synchronized 是一种悲观锁，存在一定的性能问题。 锁机制java中的锁机制是为了实现数据一致的一种方式，在并发的情况下，共享资源可能同时被多个线程使用。假设 A 线程和 B 线程同时获取到变量 i，并对其加 1 ，那么最">
+<meta name="twitter:description" content="CAS概念与JAVA实现">
 <meta name="twitter:image" content="https://s1.ax1x.com/2018/09/25/iKa7dI.md.png">
 
 
@@ -326,7 +326,7 @@
                 
               
 
-              <time title="Created: 2018-09-25 11:17:09 / Modified: 15:07:44" itemprop="dateCreated datePublished" datetime="2018-09-25T11:17:09+08:00">2018-09-25</time>
+              <time title="Created: 2018-09-25 11:17:09 / Modified: 15:26:14" itemprop="dateCreated datePublished" datetime="2018-09-25T11:17:09+08:00">2018-09-25</time>
             
 
             
@@ -349,6 +349,8 @@
 
           
 
+          
+              <div class="post-description">CAS概念与JAVA实现</div>
           
 
         </div>
