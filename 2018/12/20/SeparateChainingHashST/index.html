@@ -99,29 +99,27 @@
 
 
 
-  <meta name="description" content="本篇包含 springboot actuator与springboot admin 的使用">
-<meta name="keywords" content="springboot">
+  <meta name="description" content="散列表的学习笔记以及代码实现">
+<meta name="keywords" content="算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springboot（三）_使用springboot actuator与springboot admin对微服务进行监控">
-<meta property="og:url" content="http://yoursite.com/2018/07/12/springboot-actuator与springboot-admin/index.html">
+<meta property="og:title" content="算法练习_基于拉链法的散列表">
+<meta property="og:url" content="http://yoursite.com/2018/12/20/SeparateChainingHashST/index.html">
 <meta property="og:site_name" content="我是zhyee">
-<meta property="og:description" content="本篇包含 springboot actuator与springboot admin 的使用">
+<meta property="og:description" content="散列表的学习笔记以及代码实现">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMIH3t.md.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMoS4s.md.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMoS4s.md.png">
-<meta property="og:updated_time" content="2018-07-20T12:56:25.613Z">
+<meta property="og:image" content="https://s1.ax1x.com/2018/12/21/Fst8zD.png">
+<meta property="og:updated_time" content="2018-12-21T10:47:58.545Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springboot（三）_使用springboot actuator与springboot admin对微服务进行监控">
-<meta name="twitter:description" content="本篇包含 springboot actuator与springboot admin 的使用">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/07/15/PMIH3t.md.png">
+<meta name="twitter:title" content="算法练习_基于拉链法的散列表">
+<meta name="twitter:description" content="散列表的学习笔记以及代码实现">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/12/21/Fst8zD.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/12/springboot-actuator与springboot-admin/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/12/20/SeparateChainingHashST/"/>
 
 
 
@@ -131,7 +129,7 @@
   };
 </script>
 
-  <title>springboot（三）_使用springboot actuator与springboot admin对微服务进行监控 | 我是zhyee</title>
+  <title>算法练习_基于拉链法的散列表 | 我是zhyee</title>
   
 
 
@@ -318,7 +316,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/springboot-actuator与springboot-admin/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/SeparateChainingHashST/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhyee">
@@ -335,7 +333,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">springboot（三）_使用springboot actuator与springboot admin对微服务进行监控
+          <h1 class="post-title" itemprop="name headline">算法练习_基于拉链法的散列表
               
             
           </h1>
@@ -360,7 +358,7 @@
                 
               
 
-              <time title="Created: 2018-07-12 16:50:18" itemprop="dateCreated datePublished" datetime="2018-07-12T16:50:18+08:00">2018-07-12</time>
+              <time title="Created: 2018-12-20 18:35:18" itemprop="dateCreated datePublished" datetime="2018-12-20T18:35:18+08:00">2018-12-20</time>
             
 
             
@@ -377,7 +375,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-20 20:56:25" itemprop="dateModified" datetime="2018-07-20T20:56:25+08:00">2018-07-20</time>
+                <time title="Modified: 2018-12-21 18:47:58" itemprop="dateModified" datetime="2018-12-21T18:47:58+08:00">2018-12-21</time>
               
             
           </span>
@@ -396,7 +394,7 @@
           
 
           
-              <div class="post-description">本篇包含 springboot actuator与springboot admin 的使用</div>
+              <div class="post-description">散列表的学习笔记以及代码实现</div>
           
 
         </div>
@@ -412,31 +410,15 @@
       
 
       
-        <p>本系列的所有源码可以从<a href="https://github.com/yanyzy/spring-boot-practice" target="_blank" rel="noopener">github</a>获取</p>
-<h2 id="SpringBoot-Actuator"><a href="#SpringBoot-Actuator" class="headerlink" title="SpringBoot Actuator"></a>SpringBoot Actuator</h2><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>SpringBoot Actuator 是包含一系列端点，这些端点可以实现对服务的监控，暴露出服务的实时状态。在微服务的架构中，可以帮助我们对系统有整体的把控。</p>
-<h4 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h4><p>在pom.xml中引入 spring-boot-starter-actuator 依赖即可开启 actuator 监控，这里用到的代码是在 <a href="https://zhyee.top/2018/07/09/springboot%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" rel="noopener">springboot（一）_快速上手springboot</a>中搭建好的。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>启动项目，在浏览器访问  <a href="http://localhost:8099/health" target="_blank" rel="noopener">http://localhost:8099/health</a> ，我们可以看到返回了服务的当前状态。</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"status"</span>:<span class="string">"UP"</span>&#125;</span><br></pre></td></tr></table></figure>
-<p>Actuator 的一系列端点可以在<a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints" target="_blank" rel="noopener">官方网站</a>查询，当然，有很多端点是默认敏感的，也就是没有通过安全校验无法访问，比如 /metrics 端点，访问回返回 404 错误。如果想要访问这些端点，可以配置 application.properties 。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">endpoints.sensitive=false</span><br></pre></td></tr></table></figure>
-<p>Spring Boot 2.x 的配置稍有更改，可以参考官网。另外，shutdown 端点默认是不可用的，如果想要开启 shutdown 功能需要配置，并且shutdown是post请求。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">endpoints.shutdown.enabled=true</span><br></pre></td></tr></table></figure>
-<p>端点提供了非常全面的监控，但是这样每次去请求接口非常麻烦，返回的json信息也不够直观。所以，需要使用Spring Boot Admin。</p>
-<h2 id="Spring-Boot-Admin"><a href="#Spring-Boot-Admin" class="headerlink" title="Spring Boot Admin"></a>Spring Boot Admin</h2><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><p>Spring Boot Admin 是管理和监控 Spring Boot 应用的开源软件，它对 SpringBoot Actuator 进行了封装，可以在列表中浏览被监控的 Spring Boot 的信息。</p>
-<h4 id="admin-server"><a href="#admin-server" class="headerlink" title="admin-server"></a>admin-server</h4><p>首先搭建一个 admin-server ，在项目的pom文件中添加</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>de.codecentric<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-admin-starter-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>spring-boot-admin-starter-server 已经包含了 ui 的依赖，不用另外引入，在启动类加上 @EnableAdminServer 注解</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableAdminServer</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringBootAdminServerApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(SpringBootAdminServerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>启动程序，访问 localhost:8080 ，可以看到我们的server端已经搭建好了</p>
-<p><a href="https://imgchr.com/i/PMIH3t" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2018/07/15/PMIH3t.md.png" alt="PMIH3t.md.png"></a></p>
-<h4 id="admin-client"><a href="#admin-client" class="headerlink" title="admin-client"></a>admin-client</h4><p>将 SpringBoot Actuator 用到的代码作为 client ，注释掉 actuator的依赖，引入 spring-boot-admin-starter-client 依赖</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>de.codecentric<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-admin-starter-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.boot.admin.url=http://localhost:8080</span><br><span class="line">#关闭安全校验</span><br><span class="line">management.security.enabled=false</span><br></pre></td></tr></table></figure>
-<p>重启项目，刷新 localhost:8080，client 端已经注册上来了<a href="https://imgchr.com/i/PMoS4s" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2018/07/15/PMoS4s.md.png" alt="PMoS4s.md.png"></a></p>
-<p>点击 details 能够看到详细的监控信息</p>
-<p><a href="https://imgchr.com/i/PMoS4s" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2018/07/15/PMoS4s.md.png" alt="PMoS4s.md.png"></a></p>
+        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>散列表（哈希表）是一种无序符号表，将键作为数组的索引，而数组中键 i 处就是它对应的值，这样可以增大访问速度。散列算法分为两步：</p>
+<ul>
+<li>用散列函数将键转化为一个索引</li>
+<li>处理碰撞冲突（理想情况下，散列函数会将不同的键转化为不同的散列值，但在实际情况中，我们需要面对不同的键散列到相同索引的情况。）</li>
+</ul>
+<h1 id="基于拉链法的散列表"><a href="#基于拉链法的散列表" class="headerlink" title="基于拉链法的散列表"></a>基于拉链法的散列表</h1><p>拉链法的实现方式是将数组中的每个元素指向一条链表，链表中的每个节点储存了散列值为该索引的键的值。拉链法的查找分为两步，首先根据散列值找到相应的链表，再按顺序在链表中查找值。这样我们操作的其实是链表，降低了复杂度。</p>
+<h1 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h1><p><img src="https://s1.ax1x.com/2018/12/21/Fst8zD.png" alt="Fst8zD.png"></p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>基于拉链法的散列表：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SeparateChainingHashST</span>&lt;<span class="title">K</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;<span class="title">K</span>&gt;, <span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> M; <span class="comment">//散列表大小</span></span><br><span class="line">    SequentialSearchST&lt;K, V&gt;[] sequentialSearchSTS; <span class="comment">//基于链表的简单符号表</span></span><br><span class="line"></span><br><span class="line">    SeparateChainingHashST(<span class="keyword">int</span> m) &#123;</span><br><span class="line">        M = m;</span><br><span class="line">        sequentialSearchSTS = <span class="keyword">new</span> SequentialSearchST[m];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            sequentialSearchSTS[i] = <span class="keyword">new</span> SequentialSearchST&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> hash = hash(key);</span><br><span class="line">        SequentialSearchST&lt;K, V&gt; sequentialSearchST = sequentialSearchSTS[hash];</span><br><span class="line">        sequentialSearchST.put(key, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">V <span class="title">get</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> hash = hash(key);</span><br><span class="line">        SequentialSearchST&lt;K, V&gt; sequentialSearchST = sequentialSearchSTS[hash];</span><br><span class="line">        <span class="keyword">return</span> sequentialSearchST.get(key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> hash = hash(key);</span><br><span class="line">        SequentialSearchST&lt;K, V&gt; sequentialSearchST = sequentialSearchSTS[hash];</span><br><span class="line">        sequentialSearchST.delete(key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hash</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (key.hashCode() &amp; <span class="number">0x7fffffff</span>) % M;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -457,7 +439,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/springboot/" rel="tag"># springboot</a>
+            <a href="/tags/算法/" rel="tag"># 算法</a>
           
         </div>
       
@@ -470,8 +452,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/10/14-最长公共前缀-LongestCommonPrefix/" rel="next" title="14_最长公共前缀_LongestCommonPrefix">
-                <i class="fa fa-chevron-left"></i> 14_最长公共前缀_LongestCommonPrefix
+              <a href="/2018/11/18/BST/" rel="next" title="算法练习_二叉查找树">
+                <i class="fa fa-chevron-left"></i> 算法练习_二叉查找树
               </a>
             
           </div>
@@ -479,10 +461,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/20/springboot（四）-springboot集成mybatis/" rel="prev" title="springboot（四）_springboot集成mybatis并添加定时任务">
-                springboot（四）_springboot集成mybatis并添加定时任务 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -651,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBoot-Actuator"><span class="nav-number">1.</span> <span class="nav-text">SpringBoot Actuator</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念"><span class="nav-number">1.0.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速入门"><span class="nav-number">1.0.2.</span> <span class="nav-text">快速入门</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Boot-Admin"><span class="nav-number">2.</span> <span class="nav-text">Spring Boot Admin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#admin-server"><span class="nav-number">2.0.2.</span> <span class="nav-text">admin-server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#admin-client"><span class="nav-number">2.0.3.</span> <span class="nav-text">admin-client</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于拉链法的散列表"><span class="nav-number">2.</span> <span class="nav-text">基于拉链法的散列表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图解"><span class="nav-number">3.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">4.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
             
 
           </div>
