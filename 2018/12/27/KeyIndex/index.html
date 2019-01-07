@@ -107,13 +107,13 @@
 <meta property="og:site_name" content="我是zhyee">
 <meta property="og:description" content="字符串排序的学习笔记以及代码实现">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://s1.ax1x.com/2018/12/27/FR5Sk4.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/07/FbMgdP.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/12/27/FR5lct.md.png">
-<meta property="og:updated_time" content="2018-12-27T15:43:31.661Z">
+<meta property="og:updated_time" content="2019-01-07T03:06:03.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法练习_低位优先的字符串排序算法">
 <meta name="twitter:description" content="字符串排序的学习笔记以及代码实现">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/12/27/FR5Sk4.png">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/01/07/FbMgdP.png">
 
 
 
@@ -359,12 +359,24 @@
                 
               
 
-              <time title="Created: 2018-12-27 23:35:10 / Modified: 23:43:31" itemprop="dateCreated datePublished" datetime="2018-12-27T23:35:10+08:00">2018-12-27</time>
+              <time title="Created: 2018-12-27 23:35:10" itemprop="dateCreated datePublished" datetime="2018-12-27T23:35:10+08:00">2018-12-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-07 11:06:03" itemprop="dateModified" datetime="2019-01-07T11:06:03+08:00">2019-01-07</time>
               
             
           </span>
@@ -408,7 +420,7 @@
 <li>回写：将排好序的数组写回原数组。</li>
 </ul>
 <h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p>假设将学生分为若干组，标号 1、2、3等，希望将学生按组分类</p>
-<p><img src="https://s1.ax1x.com/2018/12/27/FR5Sk4.png" alt="FR5Sk4.png"></p>
+<p><img src="https://s2.ax1x.com/2019/01/07/FbMgdP.png" alt="FbMgdP.png"></p>
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">KeyIndex</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Student[] sort(Student[] students, <span class="keyword">int</span> r) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> length = students.length;</span><br><span class="line">        <span class="keyword">int</span>[] count = <span class="keyword">new</span> <span class="keyword">int</span>[r + <span class="number">1</span>];</span><br><span class="line">        Student[] aux = <span class="keyword">new</span> Student[length];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//频率统计</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            count[students[i].getKey() + <span class="number">1</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//转换为索引</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; r; j++) &#123;</span><br><span class="line">            count[j + <span class="number">1</span>] = count[j + <span class="number">1</span>] + count[j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//数据分类</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            aux[count[students[i].getKey()]++] = students[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//回写</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            students[i] = aux[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> students;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name, <span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.key = key;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getKey</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> key;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Student&#123;"</span> +</span><br><span class="line">                <span class="string">"name='"</span> + name + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", key="</span> + key +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="低位优先的字符串排序算法"><a href="#低位优先的字符串排序算法" class="headerlink" title="低位优先的字符串排序算法"></a>低位优先的字符串排序算法</h1><p>假设有一位工程师，记录了给定时间段内某条公路上所有车辆的车牌号，他希望知道总共有多少不同的车辆经过这段高速公路。解决这个问题的一种简单方法就是将所有车牌号排序，然后遍历找出不同车牌号的数量。这可以使用键索引计数法来完成，从右向左以每个位置的字符作为键。</p>
 <h2 id="图解-1"><a href="#图解-1" class="headerlink" title="图解"></a>图解</h2><p><a href="https://imgchr.com/i/FR5lct" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2018/12/27/FR5lct.md.png" alt="FR5lct.md.png"></a></p>
@@ -456,6 +468,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/07/MSD/" rel="prev" title="算法练习_高位优先的字符串排序算法">
+                算法练习_高位优先的字符串排序算法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -533,7 +549,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -644,7 +660,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
