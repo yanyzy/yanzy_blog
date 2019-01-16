@@ -99,28 +99,27 @@
 
 
 
-  <meta name="description" content="R向单词查找树的学习笔记以及代码实现">
+  <meta name="description" content="三向单词查找树的学习笔记以及代码实现">
 <meta name="keywords" content="算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法练习_R向单词查找树">
-<meta property="og:url" content="http://yoursite.com/2019/01/15/R-TrieST/index.html">
+<meta property="og:title" content="算法练习_三向单词查找树">
+<meta property="og:url" content="http://yoursite.com/2019/01/16/TST/index.html">
 <meta property="og:site_name" content="我是zhyee">
-<meta property="og:description" content="R向单词查找树的学习笔记以及代码实现">
+<meta property="og:description" content="三向单词查找树的学习笔记以及代码实现">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://s2.ax1x.com/2019/01/15/FzcOGd.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/01/15/FzgtL6.png">
-<meta property="og:updated_time" content="2019-01-16T01:24:24.630Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/01/16/kS1cvR.png">
+<meta property="og:updated_time" content="2019-01-16T06:49:30.202Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法练习_R向单词查找树">
-<meta name="twitter:description" content="R向单词查找树的学习笔记以及代码实现">
-<meta name="twitter:image" content="https://s2.ax1x.com/2019/01/15/FzcOGd.png">
+<meta name="twitter:title" content="算法练习_三向单词查找树">
+<meta name="twitter:description" content="三向单词查找树的学习笔记以及代码实现">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/01/16/kS1cvR.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/15/R-TrieST/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/16/TST/"/>
 
 
 
@@ -130,7 +129,7 @@
   };
 </script>
 
-  <title>算法练习_R向单词查找树 | 我是zhyee</title>
+  <title>算法练习_三向单词查找树 | 我是zhyee</title>
   
 
 
@@ -317,7 +316,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/15/R-TrieST/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/16/TST/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhyee">
@@ -334,7 +333,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">算法练习_R向单词查找树
+          <h1 class="post-title" itemprop="name headline">算法练习_三向单词查找树
               
             
           </h1>
@@ -359,24 +358,12 @@
                 
               
 
-              <time title="Created: 2019-01-15 13:17:22" itemprop="dateCreated datePublished" datetime="2019-01-15T13:17:22+08:00">2019-01-15</time>
+              <time title="Created: 2019-01-16 23:17:22 / Modified: 14:49:30" itemprop="dateCreated datePublished" datetime="2019-01-16T23:17:22+08:00">2019-01-16</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-01-16 09:24:24" itemprop="dateModified" datetime="2019-01-16T09:24:24+08:00">2019-01-16</time>
               
             
           </span>
@@ -395,7 +382,7 @@
           
 
           
-              <div class="post-description">R向单词查找树的学习笔记以及代码实现</div>
+              <div class="post-description">三向单词查找树的学习笔记以及代码实现</div>
           
 
         </div>
@@ -411,34 +398,18 @@
       
 
       
-        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>单词查找树由字符串键中的所有字符构造而成，允许使用被查找键中的字符进行查找。</p>
-<p>与各种查找树一样，单词查找树也是由链接的节点组成，每个节点都只有一个父节点（根结点除外），每个节点有R个子节点，R 为字母表的大小，示例中使用大小为 256 的字母表。我们将每个键所关联的值，保存在该键最后一个字母所在的结点中。</p>
-<p>值为空的结点，在字母表中没有对应的键。因为在单词查找树中，并不保存键，仅按照字母在字母表中的索引构造单词查找树。</p>
-<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><p>与之前的符号表学习一样，首先需要了解单词查找树的 API，弄清楚需要实现什么样的代码</p>
-<p><img src="https://s2.ax1x.com/2019/01/15/FzcOGd.png" alt="FzcOGd.png"></p>
-<p>其中增加了几个不同的 api，假设符号表中有 she，sh，sells，by，sea 这几个键：</p>
+        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>在 <a href="https://zhyee.top/2019/01/15/R-TrieST/" target="_blank" rel="noopener">R 向单词查找树</a>中，每生成一个新结点，就会为该结点生成 R 个子节点，然后很多结点都是空的，因此，为了避免 R 向单词查找树的过度空间消耗，可以使用另一种数据结构的表示方法——三向单词查找树。</p>
+<p>三向单词查找树中：</p>
 <ul>
-<li><p>longestPrefixOf（）接受一个字符串参数，返回符号表中该字符串前缀中最长的键。longestPrefixOf(“shel”)返回的结果是 she；</p>
-</li>
-<li><p>keysWithPrefix（）接受一个字符串参数，返回符号表中所有以该字符串为前缀的键。keyWithPrefix(“sh”)返回的结果是 she sh；</p>
-</li>
-<li><p>keysThatMatch（）接受一个字符串参数，返回符号表中所有与改字符串匹配的键（”.”能够匹配任意字符）。keysThatMatch(“se.”)返回的结果是 sea；</p>
-</li>
+<li>每个结点包含一个字符，一个值，三个子节点；</li>
+<li>三个子节点分别对应着当前结点中，结点字母小于，等于，或大于当前结点的所有键；</li>
+<li>字符显式地保存在结点中。</li>
 </ul>
-<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p><img src="https://s2.ax1x.com/2019/01/15/FzgtL6.png" alt="FzgtL6.png"></p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h4 id="查找与插入"><a href="#查找与插入" class="headerlink" title="查找与插入"></a>查找与插入</h4><p>查找方法递归地在子树中查找键，期间如果键为空，则查找未命中。</p>
-<p>插入方法在查找键的过程中，如果键为空，则插入新建，继续在子树中递归操作。直到查找出对应的键，无论键是否为空，均修改该值。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">V <span class="title">get</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">    Node n = get(root, key, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> n == <span class="keyword">null</span> ? <span class="keyword">null</span> : (V) n.val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Node <span class="title">get</span><span class="params">(Node n, String key, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (d == key.length()) &#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span> c = key.charAt(d);</span><br><span class="line">    <span class="keyword">return</span> get(n.nodes[c], key, d + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">put</span><span class="params">(String key, V val)</span> </span>&#123;</span><br><span class="line">    root = put(root, key, val, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Node <span class="title">put</span><span class="params">(Node n, String key, V val, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (n == <span class="keyword">null</span>) &#123;</span><br><span class="line">        n = <span class="keyword">new</span> Node();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (d == key.length()) &#123;</span><br><span class="line">        n.val = val;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span> c = key.charAt(d);</span><br><span class="line">    n.nodes[c] = put(n.nodes[c], key, val, d + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>删除操作稍微复杂一点，再删除之后，检查该结点是否为空节点，如果为空，则删除该结点，再检查该结点的父节点，如果父节点也为空，则删除父节点，依次递归向上。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">    root = delete(root, key, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Node <span class="title">delete</span><span class="params">(Node n, String key, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (d == key.length()) &#123;</span><br><span class="line">        n.val = <span class="keyword">null</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">char</span> c = key.charAt(d);</span><br><span class="line">        n.nodes[c] = delete(n.nodes[c], key, d + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (n.val != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (Node node : n.nodes) &#123;</span><br><span class="line">        <span class="keyword">if</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="遍历所有键"><a href="#遍历所有键" class="headerlink" title="遍历所有键"></a>遍历所有键</h4><p>由于在单词查找树中，并未显式地储存键，所以要得到所有键的集合有点麻烦。解决思路是使用队列来收集键，在方法中传入一个节点（可以理解为一颗子树），前缀（该结点以上的所有字符按顺序拼接），以及一个用于存储键的队列（队列使用《算法》中提供的数据结构，代码见下文）。该方法递归地在每一颗子树中收取符合条件的键。</p>
-<p>keys（）方法起始前缀为 “ ”，因为包含所有键；keysWithPrefix（）方法会先查找符合前缀条件的结点（子树），再使用 collect（）收集。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Iterable&lt;String&gt; <span class="title">keys</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> keysWithPrefix(<span class="string">""</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Iterable&lt;String&gt; <span class="title">keysWithPrefix</span><span class="params">(String pre)</span> </span>&#123;</span><br><span class="line">    Queue&lt;String&gt; q = <span class="keyword">new</span> Queue&lt;&gt;();</span><br><span class="line">    collect(get(root, pre, <span class="number">0</span>), pre, q);</span><br><span class="line">    <span class="keyword">return</span> q;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">collect</span><span class="params">(Node n, String pre, Queue&lt;String&gt; queue)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n.val != <span class="keyword">null</span>) &#123;</span><br><span class="line">        queue.enqueue(pre);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">char</span> c = <span class="number">0</span>; c &lt; R; c++) &#123;</span><br><span class="line">        collect(n.nodes[c], pre + c, queue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="字符串匹配"><a href="#字符串匹配" class="headerlink" title="字符串匹配"></a>字符串匹配</h4><p>需要注意的是，“.” 表示所有字符，因此，在遍历时，如果遇到 “.”，需要遍历所有子树，而如果是特定字符，只需遍历该字符的子树。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Iterable&lt;String&gt; <span class="title">keysThatMatch</span><span class="params">(String pat)</span> </span>&#123;</span><br><span class="line">    Queue&lt;String&gt; q = <span class="keyword">new</span> Queue&lt;&gt;();</span><br><span class="line">    collect(root, <span class="string">""</span>, pat, q);</span><br><span class="line">    <span class="keyword">return</span> q;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">collect</span><span class="params">(Node n, String pre, String pat, Queue&lt;String&gt; queue)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n.val != <span class="keyword">null</span>) &#123;</span><br><span class="line">        queue.enqueue(pre);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d = pre.length();</span><br><span class="line">    <span class="keyword">if</span> (d == pat.length()) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span> c = pat.charAt(d);</span><br><span class="line">    <span class="keyword">if</span> (c == <span class="string">'.'</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> i = <span class="number">0</span>; i &lt; R; i++) &#123;</span><br><span class="line">            collect(n.nodes[i], pre + i, pat, queue);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        collect(n.nodes[c], pre + c, pat, queue);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="最长前缀"><a href="#最长前缀" class="headerlink" title="最长前缀"></a>最长前缀</h4><p>这里使用一个 search（）方法去查找最长字符串索引</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">String <span class="title">longestPrefix</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> index = search(root, s, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> s.substring(<span class="number">0</span>, index);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(Node n, String s, <span class="keyword">int</span> d, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> length;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n.val != <span class="keyword">null</span>) &#123;</span><br><span class="line">        length = d;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (d == s.length()) &#123;</span><br><span class="line">        <span class="keyword">return</span> length;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> search(n.nodes[s.charAt(d)], s, d + <span class="number">1</span>, length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/yanyzy/algorithms-practice/blob/master/src/main/java/algorithms/strings/TrieST.java" target="_blank" rel="noopener">完整代码参考</a></p>
+<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p>下图上，上面为 R 向单词查找树的示例，下面为三向单词查找树的示例</p>
+<p><img src="https://s2.ax1x.com/2019/01/16/kS1cvR.png" alt="kS1cvR.png"></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h4 id="查找与插入"><a href="#查找与插入" class="headerlink" title="查找与插入"></a>查找与插入</h4><p>在三向单词查找树的查找操作中，我们先对比根节点，如果键的首字母较小，则在左侧子树中查找；如果键首字母较大，则在右子树中查找。递归进行该算法，知道遇到空节点或键结束。</p>
+<p>进行插入操作时，在查找的基础之上，每当遇到一个空链接，则新建一个结点并保存字符。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TST</span>&lt;<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Node root;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span> c;</span><br><span class="line">        V val;</span><br><span class="line">        Node left;</span><br><span class="line">        Node mid;</span><br><span class="line">        Node right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> V <span class="title">get</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        Node n = get(root, key, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> n == <span class="keyword">null</span> ? <span class="keyword">null</span> : n.val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Node <span class="title">get</span><span class="params">(Node n, String key, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (d == key.length() - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">char</span> h = key.charAt(d);</span><br><span class="line">        Node next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (h &lt; n.c) &#123;</span><br><span class="line">            next = n.left;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (h == n.c) &#123;</span><br><span class="line">            next = n.mid;</span><br><span class="line">            d = d + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            next = n.right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> get(next, key, d);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">put</span><span class="params">(String key, V val)</span> </span>&#123;</span><br><span class="line">        root = put(root, key, val, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Node <span class="title">put</span><span class="params">(Node n, String key, V val, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">char</span> c = key.charAt(d);</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="keyword">null</span>) &#123;</span><br><span class="line">            n = <span class="keyword">new</span> Node();</span><br><span class="line">            n.c = c;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (c &lt; n.c) &#123;</span><br><span class="line">            n.left = put(n.left, key, val, d);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c &gt; n.c) &#123;</span><br><span class="line">            n.right = put(n.right, key, val, d);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (d &lt; key.length() - <span class="number">1</span>) &#123;</span><br><span class="line">            n.mid = put(n.mid, key, val, d + <span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            n.val = val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TST&lt;Integer&gt; tst = <span class="keyword">new</span> TST&lt;&gt;();</span><br><span class="line">        tst.put(<span class="string">"test"</span>, <span class="number">9</span>);</span><br><span class="line">        tst.put(<span class="string">"by"</span>, <span class="number">2</span>);</span><br><span class="line">        tst.put(<span class="string">"she"</span>, <span class="number">3</span>);</span><br><span class="line">        tst.put(<span class="string">"tyan"</span>, <span class="number">5</span>);</span><br><span class="line">        Assert.check(<span class="number">9</span> == tst.get(<span class="string">"test"</span>));</span><br><span class="line">        Assert.check(<span class="number">2</span> == tst.get(<span class="string">"by"</span>));</span><br><span class="line">        Assert.check(<span class="number">3</span> == tst.get(<span class="string">"she"</span>));</span><br><span class="line">        Assert.check(<span class="number">5</span> == tst.get(<span class="string">"tyan"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p>《算法》</p>
 
       
@@ -473,8 +444,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/07/MSD/" rel="next" title="算法练习_高位优先的字符串排序算法">
-                <i class="fa fa-chevron-left"></i> 算法练习_高位优先的字符串排序算法
+              <a href="/2019/01/15/R-TrieST/" rel="next" title="算法练习_R向单词查找树">
+                <i class="fa fa-chevron-left"></i> 算法练习_R向单词查找树
               </a>
             
           </div>
@@ -482,10 +453,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/16/TST/" rel="prev" title="算法练习_三向单词查找树">
-                算法练习_三向单词查找树 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -654,7 +621,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#API"><span class="nav-number">2.</span> <span class="nav-text">API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图解"><span class="nav-number">2.1.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">2.2.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查找与插入"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">查找与插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历所有键"><span class="nav-number">2.2.0.3.</span> <span class="nav-text">遍历所有键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串匹配"><span class="nav-number">2.2.0.4.</span> <span class="nav-text">字符串匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最长前缀"><span class="nav-number">2.2.0.5.</span> <span class="nav-text">最长前缀</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图解"><span class="nav-number">1.1.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">1.2.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查找与插入"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">查找与插入</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">2.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
             
 
           </div>
