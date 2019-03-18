@@ -99,27 +99,31 @@
 
 
 
-  <meta name="description" content="暴力子字符串查找算法的学习笔记以及代码实现">
-<meta name="keywords" content="算法">
+  <meta name="description" content="硬件了解">
+<meta name="keywords" content="操作系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法练习_暴力子字符串查找算法">
-<meta property="og:url" content="http://yoursite.com/2019/01/28/Brute/index.html">
+<meta property="og:title" content="操作系统笔记_操作系统硬件">
+<meta property="og:url" content="http://yoursite.com/2019/03/18/OperatingsystemHardware/index.html">
 <meta property="og:site_name" content="我是zhyee">
-<meta property="og:description" content="暴力子字符串查找算法的学习笔记以及代码实现">
+<meta property="og:description" content="硬件了解">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://s2.ax1x.com/2019/01/28/kK5Kne.png">
-<meta property="og:updated_time" content="2019-01-28T03:53:02.641Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/17/AeYFSI.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/17/AeBGo6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/17/AesEdI.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/17/AeytHA.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/Am2tXT.png">
+<meta property="og:updated_time" content="2019-03-18T09:45:52.825Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法练习_暴力子字符串查找算法">
-<meta name="twitter:description" content="暴力子字符串查找算法的学习笔记以及代码实现">
-<meta name="twitter:image" content="https://s2.ax1x.com/2019/01/28/kK5Kne.png">
+<meta name="twitter:title" content="操作系统笔记_操作系统硬件">
+<meta name="twitter:description" content="硬件了解">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/03/17/AeYFSI.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/28/Brute/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/18/OperatingsystemHardware/"/>
 
 
 
@@ -129,7 +133,7 @@
   };
 </script>
 
-  <title>算法练习_暴力子字符串查找算法 | 我是zhyee</title>
+  <title>操作系统笔记_操作系统硬件 | 我是zhyee</title>
   
 
 
@@ -316,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/28/Brute/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/18/OperatingsystemHardware/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhyee">
@@ -333,7 +337,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">算法练习_暴力子字符串查找算法
+          <h1 class="post-title" itemprop="name headline">操作系统笔记_操作系统硬件
               
             
           </h1>
@@ -358,7 +362,7 @@
                 
               
 
-              <time title="Created: 2019-01-28 11:34:47 / Modified: 11:53:02" itemprop="dateCreated datePublished" datetime="2019-01-28T11:34:47+08:00">2019-01-28</time>
+              <time title="Created: 2019-03-18 16:54:43 / Modified: 17:45:52" itemprop="dateCreated datePublished" datetime="2019-03-18T16:54:43+08:00">2019-03-18</time>
             
 
             
@@ -382,7 +386,7 @@
           
 
           
-              <div class="post-description">暴力子字符串查找算法的学习笔记以及代码实现</div>
+              <div class="post-description">硬件了解</div>
           
 
         </div>
@@ -398,11 +402,38 @@
       
 
       
-        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h3 id="子字符串查找"><a href="#子字符串查找" class="headerlink" title="子字符串查找"></a>子字符串查找</h3><p>给定长为 N 的文本，以及长为 M 的模式，在字符串中查找匹配该模式的子字符串，例如我们常用的 ctrl+f 查找。模式相对于文本是很短的。</p>
-<h3 id="暴力子字符串查找"><a href="#暴力子字符串查找" class="headerlink" title="暴力子字符串查找"></a>暴力子字符串查找</h3><p>子字符串查找有一个简单而广泛的暴力法，它在最坏的情况下运行时间与 MN 成正比。该方法是在文本中模式可能出现的任何地方进行匹配检查。当检查到符合模式的第一个字符时，依次检查后续字符，若后续某一字符不匹配，则将计数置零，从当前字符重新进行匹配。</p>
-<h1 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h1><p><img src="https://s2.ax1x.com/2019/01/28/kK5Kne.png" alt="kK5Kne.png"></p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Brute</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(String pat, String txt)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> N = pat.length();</span><br><span class="line">        <span class="keyword">int</span> M = txt.length();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= M - N; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> j;</span><br><span class="line">            <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">                <span class="comment">//如果不匹配则重新计数</span></span><br><span class="line">                <span class="keyword">if</span> (pat.charAt(j) != txt.charAt(i + j)) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//全部匹配成功，返回索引</span></span><br><span class="line">            <span class="keyword">if</span> (j == N) &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> M;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p>《算法》</p>
+        <p><a href="https://imgchr.com/i/AeYFSI" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/17/AeYFSI.png" alt="AeYFSI.png"></a></p>
+<h2 id="什么是操作系统"><a href="#什么是操作系统" class="headerlink" title="什么是操作系统"></a>什么是操作系统</h2><p>操作系统是一种运行在内核态的软件。它具有对所有硬件的完全访问权，可以执行机器能够运行的任何指令。</p>
+<h4 id="作为扩展机器的操作系统"><a href="#作为扩展机器的操作系统" class="headerlink" title="作为扩展机器的操作系统"></a>作为扩展机器的操作系统</h4><p>操作系统的主要任务是隐藏硬件，呈现给程序良好、清晰、优雅、一致的抽象。（软件开发过程中也应该秉承此理念）</p>
+<h4 id="作为资源管理者的操作系统"><a href="#作为资源管理者的操作系统" class="headerlink" title="作为资源管理者的操作系统"></a>作为资源管理者的操作系统</h4><p>操作系统的任务是在相互竞争的程序之间有序地控制对处理器，存储器以及其他 I/O 接口设备的分配<br>资源管理包括两种方式实现多路复用资源：</p>
+<ul>
+<li>时间复用：不同的程序或用户轮流使用资源</li>
+<li>空间复用：每个用户或程序都得到资源的一部分</li>
+</ul>
+<h2 id="计算机硬件"><a href="#计算机硬件" class="headerlink" title="计算机硬件"></a>计算机硬件</h2><p><a href="https://imgchr.com/i/AeBGo6" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/17/AeBGo6.png" alt="AeBGo6.png"></a><br>简单的计算机模型：CPU，内存以及 I/O 设备由一条系统总线连接起来，并通过总线与其他设备通信。现代个人计算机更加复杂，包含多重总线。</p>
+<h4 id="处理器"><a href="#处理器" class="headerlink" title="处理器"></a>处理器</h4><p>CPU 是计算机的“大脑”，一个基本周期是，从内存中取出指令，解码，接着执行。由于用来访问内存以得到指令或数据的时间，比执行指令的时间长得多，因此，所有 CPU 内都有一些用来保存临时数据和关键变量的寄存器。</p>
+<h5 id="流水线"><a href="#流水线" class="headerlink" title="流水线"></a>流水线</h5><p>许多现代 CPU 具有的，同时取出多条指令的机制。</p>
+<p>比流水线更先进的设计是一种超标量 CPU ，两个或更多指令被同时取出，解码并装入保持缓冲区，一旦有执行单元空闲，就检查保持缓冲区是否有待执行的指令。<br><a href="https://imgchr.com/i/AesEdI" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/17/AesEdI.png" alt="AesEdI.png"></a></p>
+<h5 id="多线程和多核芯片"><a href="#多线程和多核芯片" class="headerlink" title="多线程和多核芯片"></a>多线程和多核芯片</h5><p>多线程允许 CPU 保持两个不同的线程状态，然后在纳秒级的时间尺度内来回切换。</p>
+<h4 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h4><p>目前的技术无法同时满足存储器迅速，充分大，便宜这三个目标，因此，存储器采用了一种分层结构。<br><a href="https://imgchr.com/i/AeytHA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/17/AeytHA.png" alt="AeytHA.png"></a></p>
+<h5 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h5><p>与 CPU 同种材料，因此和 CPU 一样快，但容量极小。</p>
+<h5 id="高速缓存"><a href="#高速缓存" class="headerlink" title="高速缓存"></a>高速缓存</h5><p>多数由硬件控制，主存被分割成高速缓存行，最常用的高速缓存行放置在 CPU 内部或者非常接近 CPU 的高速缓存中。有些机器具有两级甚至三级高速缓存，每一级高速缓存比前一级慢且容量大。</p>
+<p>L1 缓存：在 CPU 中，通常用来将已解码的指令调入 CPU 的执行引擎。<br>L2 缓存：用来存放近来使用过的若干兆内存字。</p>
+<p>访问 L1 缓存不存在延时，访问 L2 缓存则会延时一个或两个时钟周期。</p>
+<h5 id="主存-RAM"><a href="#主存-RAM" class="headerlink" title="主存 (RAM)"></a>主存 (RAM)</h5><p>存储系统的主力，所有不能再高速缓存中得到满足的访问请求都会转往主存</p>
+<h4 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h4><p>磁盘是一种机械装置，因此随机访问数据的时间较慢。</p>
+<h4 id="磁带"><a href="#磁带" class="headerlink" title="磁带"></a>磁带</h4><p>经常用于磁盘备份，可以保存非常大量的数据集。</p>
+<h4 id="I-O-设备"><a href="#I-O-设备" class="headerlink" title="I/O 设备"></a>I/O 设备</h4><p>I/O 设备一般包括<strong>设备控制器</strong>和<strong>设备本身</strong>，</p>
+<p>实现输入和输出的方式：</p>
+<ul>
+<li>忙等待：CPU 一直轮询设备直到相应的操作完成</li>
+<li>设备驱动程序启动设备，并让该设备在完成操作时发出一个中断</li>
+<li>为 I/O 使用一种特殊的直接存储器访问</li>
+</ul>
+<h4 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h4><p>现代处理器和存储器的速度越来越快，早期的单总线模型很难处理总线的交通流量，演化结果是，系统中有传输速度和功能都不同的总线。<br><a href="https://imgchr.com/i/Am2tXT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/18/Am2tXT.png" alt="Am2tXT.png"></a></p>
+<ul>
+<li>即插即用 I/O 系统：系统自动收集有关 I/O 设备的信息，集中赋予中断级别与 I/O 地址，然后通知每块卡所使用的数值。</li>
+</ul>
 
       
     </div>
@@ -423,7 +454,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
           
         </div>
       
@@ -436,8 +467,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/16/TST/" rel="next" title="算法练习_三向单词查找树">
-                <i class="fa fa-chevron-left"></i> 算法练习_三向单词查找树
+              <a href="/2019/02/23/关于micometer统计最长gc时间为0的问题排查/" rel="next" title="关于micrometer统计最长gc时间为0的问题排查">
+                <i class="fa fa-chevron-left"></i> 关于micrometer统计最长gc时间为0的问题排查
               </a>
             
           </div>
@@ -445,10 +476,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/23/关于micometer统计最长gc时间为0的问题排查/" rel="prev" title="关于micrometer统计最长gc时间为0的问题排查">
-                关于micrometer统计最长gc时间为0的问题排查 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -619,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#子字符串查找"><span class="nav-number">1.0.1.</span> <span class="nav-text">子字符串查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暴力子字符串查找"><span class="nav-number">1.0.2.</span> <span class="nav-text">暴力子字符串查找</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图解"><span class="nav-number">2.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是操作系统"><span class="nav-number">1.</span> <span class="nav-text">什么是操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#作为扩展机器的操作系统"><span class="nav-number">1.0.1.</span> <span class="nav-text">作为扩展机器的操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作为资源管理者的操作系统"><span class="nav-number">1.0.2.</span> <span class="nav-text">作为资源管理者的操作系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机硬件"><span class="nav-number">2.</span> <span class="nav-text">计算机硬件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#处理器"><span class="nav-number">2.0.1.</span> <span class="nav-text">处理器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#流水线"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">流水线</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多线程和多核芯片"><span class="nav-number">2.0.1.2.</span> <span class="nav-text">多线程和多核芯片</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储器"><span class="nav-number">2.0.2.</span> <span class="nav-text">存储器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#寄存器"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#高速缓存"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">高速缓存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#主存-RAM"><span class="nav-number">2.0.2.3.</span> <span class="nav-text">主存 (RAM)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#磁盘"><span class="nav-number">2.0.3.</span> <span class="nav-text">磁盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#磁带"><span class="nav-number">2.0.4.</span> <span class="nav-text">磁带</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#I-O-设备"><span class="nav-number">2.0.5.</span> <span class="nav-text">I/O 设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总线"><span class="nav-number">2.0.6.</span> <span class="nav-text">总线</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
