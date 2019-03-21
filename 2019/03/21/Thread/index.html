@@ -99,30 +99,31 @@
 
 
 
-  <meta name="description" content="了解操作系统内部的六种结构设计：单体系统、层次式系统、微内核、客户机-服务器模式、虚拟机、外核">
+  <meta name="description" content="线程就像分离的进程，共享地址空间除外。">
 <meta name="keywords" content="操作系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="操作系统笔记_操作系统结构">
-<meta property="og:url" content="http://yoursite.com/2019/03/20/OperatingSystemStructure/index.html">
+<meta property="og:title" content="操作系统笔记_线程">
+<meta property="og:url" content="http://yoursite.com/2019/03/21/Thread/index.html">
 <meta property="og:site_name" content="我是zhyee">
-<meta property="og:description" content="了解操作系统内部的六种结构设计：单体系统、层次式系统、微内核、客户机-服务器模式、虚拟机、外核">
+<meta property="og:description" content="线程就像分离的进程，共享地址空间除外。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://s2.ax1x.com/2019/03/20/AK8iOx.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/03/20/AKJ2O1.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/03/20/AKdEJf.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/03/20/AKgkuV.png">
-<meta property="og:updated_time" content="2019-03-20T07:59:37.409Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/21/A1WvZR.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/21/A1fT0A.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/21/A14DaR.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/21/A1qtu6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/21/A1j6Jg.png">
+<meta property="og:updated_time" content="2019-03-21T09:16:47.395Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="操作系统笔记_操作系统结构">
-<meta name="twitter:description" content="了解操作系统内部的六种结构设计：单体系统、层次式系统、微内核、客户机-服务器模式、虚拟机、外核">
-<meta name="twitter:image" content="https://s2.ax1x.com/2019/03/20/AK8iOx.png">
+<meta name="twitter:title" content="操作系统笔记_线程">
+<meta name="twitter:description" content="线程就像分离的进程，共享地址空间除外。">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/03/21/A1WvZR.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/20/OperatingSystemStructure/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/21/Thread/"/>
 
 
 
@@ -132,7 +133,7 @@
   };
 </script>
 
-  <title>操作系统笔记_操作系统结构 | 我是zhyee</title>
+  <title>操作系统笔记_线程 | 我是zhyee</title>
   
 
 
@@ -319,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/OperatingSystemStructure/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/21/Thread/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhyee">
@@ -336,7 +337,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">操作系统笔记_操作系统结构
+          <h1 class="post-title" itemprop="name headline">操作系统笔记_线程
               
             
           </h1>
@@ -361,7 +362,7 @@
                 
               
 
-              <time title="Created: 2019-03-20 15:50:11 / Modified: 15:59:37" itemprop="dateCreated datePublished" datetime="2019-03-20T15:50:11+08:00">2019-03-20</time>
+              <time title="Created: 2019-03-21 17:15:47 / Modified: 17:16:47" itemprop="dateCreated datePublished" datetime="2019-03-21T17:15:47+08:00">2019-03-21</time>
             
 
             
@@ -385,7 +386,7 @@
           
 
           
-              <div class="post-description">了解操作系统内部的六种结构设计：单体系统、层次式系统、微内核、客户机-服务器模式、虚拟机、外核</div>
+              <div class="post-description">线程就像分离的进程，共享地址空间除外。</div>
           
 
         </div>
@@ -401,37 +402,43 @@
       
 
       
-        <h2 id="单体系统"><a href="#单体系统" class="headerlink" title="单体系统"></a>单体系统</h2><p>全部操作系统在内核态中以单一程序的方式运行，整个操作系统以过程集合的方式编写，链接成一个大型可执行的二进制程序。</p>
-<p><a href="https://imgchr.com/i/AK8iOx" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/20/AK8iOx.png" alt="AK8iOx.png"></a></p>
-<p>结构模型</p>
+        <h2 id="线程的使用"><a href="#线程的使用" class="headerlink" title="线程的使用"></a>线程的使用</h2><p>使用线程的原因：</p>
 <ul>
-<li>主过程：处理服务过程请求</li>
-<li>服务过程：执行系统调用</li>
-<li>实用过程：辅助服务过程</li>
+<li>在许多应用中同时发生着多种活动</li>
+<li>线程比进程更轻量级，比进程更容易创建，也更容易撤销</li>
+<li>在性能上，如果存在大量的计算和大量的 I/O 处理，拥有多个线程会加快应用程序的执行速度</li>
 </ul>
-<p>这些过程可以不受限制地彼此调用，同时也常常导致出现一个笨拙和难以理解的系统。</p>
-<h2 id="层次式系统"><a href="#层次式系统" class="headerlink" title="层次式系统"></a>层次式系统</h2><p>将单体结构的系统进一步通用化，就变成一个层次式结构的操作系统，它的上层软件都是在下一层软件的基础之上构建的。</p>
-<p><img src="https://s2.ax1x.com/2019/03/20/AKJ2O1.png" alt="AKJ2O1.png"></p>
-<p>上图所示为按此模型构造的第一个操作系统，该系统分为六层，每一层通用化，而不必考虑其他层次的细节。比如，用户程序不用考虑进程，内存，控制台等细节。</p>
-<p>实际上，THE 分层方案只是为设计提供了一些方便，因为该系统的各个部分仍然被链接成了完整的单个目标程序。</p>
-<p>MULTICS 系统中采用了更进一步的通用层次化概念，它由许多同心环构造而成，内层环比外层环有更高的级别，这种环形机制在运行中是实际存在的，而且是由硬件实现的，并且易于扩展。</p>
-<h2 id="微内核"><a href="#微内核" class="headerlink" title="微内核"></a>微内核</h2><p>在分层方式中，设计者要确定在哪里划分<strong>内核-用户</strong>边界。尽可能减少内核态中的功能是一种较好的做法，因为内核中的错误会快速拖累系统。</p>
-<p>微内核设计的思想是，为了实现高可靠性，将操作系统划分成小的，良好定义的模块，只有其中一个模块–微内核，运行在内核态上，其余模块则作为普通用户进程运行。</p>
-<p><a href="https://imgchr.com/i/AKdEJf" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/20/AKdEJf.png" alt="AKdEJf.png"></a></p>
-<p>系统对每个进程的权限有着许多限制，这些限制是让每个驱动和服务器只拥有完成其工作所需要的权限，别无其他，这样极大地限制了故障部件可能造成的危害。</p>
-<p>内核中的<strong>机制</strong>与<strong>策略</strong>分离原则：一个比较简单的调度算法是，对每一个进程赋予一个优先级，并让内核执行在具有最高优先级进程中可以运行的某个进程。这里的<strong>机制</strong>就是寻找最高优先级的程序并运行之，而<strong>策略</strong>则是赋予进程优先级，可以由用户态中的进程完成。</p>
-<h2 id="客户机-服务器模式"><a href="#客户机-服务器模式" class="headerlink" title="客户机-服务器模式"></a>客户机-服务器模式</h2><p>一个微内核思想的略微变体是将进程划分为两类：服务器和客户端。</p>
+<h2 id="经典的线程模型"><a href="#经典的线程模型" class="headerlink" title="经典的线程模型"></a>经典的线程模型</h2><p>进程用于把资源集中到一起，而线程则是在 CPU 上被调度的实体。</p>
+<p>多个线程共享一个地址空间和其他资源，多个进程共享物理内存，磁盘，打印机和其他资源。</p>
+<p><img src="https://s2.ax1x.com/2019/03/21/A1WvZR.png" alt="A1WvZR.png"></p>
+<p>当多线程进程在单 CPU 系统中运行时，线程轮流运行，与进程类似。</p>
+<p>所有线程有完全一样的地址空间，也共享同样的全局变量，打开文件集，子进程等，线程之间是没有保护的。</p>
+<p><img src="https://s2.ax1x.com/2019/03/21/A1fT0A.png" alt="A1fT0A.png"></p>
+<p>线程有自己的堆栈，每个线程的堆栈有一帧，供各个被调用但是还没有从中返回的过程使用。</p>
+<h2 id="在用户空间中实现线程"><a href="#在用户空间中实现线程" class="headerlink" title="在用户空间中实现线程"></a>在用户空间中实现线程</h2><p>有两种主要的方法实现线程包：在用户空间中和在内核中</p>
+<p>把整个线程包放在用户空间中，内核对线程一无所知，从内核的角度考虑，为单线程进程。</p>
+<p>优点：</p>
 <ul>
-<li>服务器：每个服务器提供某种服务</li>
-<li>客户端：使用这些服务</li>
+<li>可以在不支持线程的系统上实现</li>
+<li>比陷入内核更快</li>
+<li>允许每个进程有自己定制的调度算法</li>
 </ul>
-<p>这个模式的本质是存在服务器进程和客户端进程。</p>
-<p><a href="https://imgchr.com/i/AKgkuV" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/20/AKgkuV.png" alt="AKgkuV.png"></a></p>
-<p>许多 web 就是以这个方式运行的，一台 pc 机向服务器请求一个资源，服务器返回资源。</p>
-<h2 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h2><p>虚拟机不是那种具有文件等优良特征的扩展计算机，与之相反，它们仅仅是裸机硬件的精确复制品。它包含了内核态/用户态，I/O功能，中断以及其他真实硬件所应该具有的全部内容。</p>
-<p>当一个虚拟机执行系统调用时，该调用被陷入到其虚拟机的操作系统上，然后虚拟机发出普通的硬件 I/O 指令读出虚拟磁盘或其他需要执行的调用，这些指令由宿主机陷入。</p>
-<h2 id="外核"><a href="#外核" class="headerlink" title="外核"></a>外核</h2><p>外核在内核态中运行，它的任务是为虚拟机分配资源，并检查试图使用这些资源的企图。</p>
-<p>外核机制的优点是减少了映像层，在其他设计中，每个虚拟机认为它有自己的磁盘，其盘块从 0 到最大编号，而虚拟机监控程序必须维护一张表格以重映像磁盘地址，有了外核则不需要了。外核只需记录以及分给各个虚拟机的相关资源即可，保持多个虚拟机不发生冲突。</p>
+<p>缺点：</p>
+<ul>
+<li>如何实现阻塞系统调用</li>
+<li>故障问题，内核不知道线程的存在，可能会阻塞整个进程，尽管其他线程是可以运行的</li>
+<li>如果一个线程运行，其他线程就不能运行，除非该线程自动放弃 CPU </li>
+</ul>
+<p>这种方式中，每个进程需要有其专用的线程表，用来跟踪线程。</p>
+<p><a href="https://imgchr.com/i/A14DaR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/21/A14DaR.png" alt="A14DaR.png"></a></p>
+<h2 id="在内核态实现线程"><a href="#在内核态实现线程" class="headerlink" title="在内核态实现线程"></a>在内核态实现线程</h2><p>内核中有用来记录系统中所有线程的线程表，对线程的操作需要执行系统调用。与用户态线程相比，创建和撤销线程代价较大。但同时也避免了一些用户态线程可能出现的问题</p>
+<h2 id="混合实现"><a href="#混合实现" class="headerlink" title="混合实现"></a>混合实现</h2><p>一种将用户级线程和内核级线程优点结合起来的方法，是使用内核级线程，然后将用户级线程与某些内核级线程多路复用起来</p>
+<p><img src="https://s2.ax1x.com/2019/03/21/A1qtu6.png" alt="A1qtu6.png"></p>
+<h2 id="调度程序激活机制"><a href="#调度程序激活机制" class="headerlink" title="调度程序激活机制"></a>调度程序激活机制</h2><p>调度程序激活工作的目标是模拟内核级线程的功能，但是为线程包提供通常在用户态才能实现的更好的性能和更大的灵活性。</p>
+<p>当使用该机制时，内核给每个进程安排一定数量的虚拟处理器，并且让运行时系统将线程分配到该处理器上。该机制的基本思路是，当内核了解到一个线程被阻塞后，通知该进程的运行时系统（这里成为上行调用），运行时系统就重新调度线程，稍后，当内核知道原来的线程又可运行时，再次通知这一事件。</p>
+<h2 id="弹出式线程"><a href="#弹出式线程" class="headerlink" title="弹出式线程"></a>弹出式线程</h2><p>弹出式线程指的是，一个消息的到达导致系统创建一个处理该消息的线程。</p>
+<p>这样做的好处是，这种线程非常新，可以快速创建，消息到达与处理开始之间的时间非常短。</p>
+<p><a href="https://imgchr.com/i/A1j6Jg" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/21/A1j6Jg.png" alt="A1j6Jg.png"></a></p>
 
       
     </div>
@@ -465,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/20/OperatingSystemConcept/" rel="next" title="操作系统笔记_操作系统概念">
-                <i class="fa fa-chevron-left"></i> 操作系统笔记_操作系统概念
+              <a href="/2019/03/20/process/" rel="next" title="操作系统笔记_进程">
+                <i class="fa fa-chevron-left"></i> 操作系统笔记_进程
               </a>
             
           </div>
@@ -474,10 +481,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/20/process/" rel="prev" title="操作系统笔记_进程">
-                操作系统笔记_进程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -648,7 +651,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单体系统"><span class="nav-number">1.</span> <span class="nav-text">单体系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#层次式系统"><span class="nav-number">2.</span> <span class="nav-text">层次式系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微内核"><span class="nav-number">3.</span> <span class="nav-text">微内核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户机-服务器模式"><span class="nav-number">4.</span> <span class="nav-text">客户机-服务器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机"><span class="nav-number">5.</span> <span class="nav-text">虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外核"><span class="nav-number">6.</span> <span class="nav-text">外核</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的使用"><span class="nav-number">1.</span> <span class="nav-text">线程的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经典的线程模型"><span class="nav-number">2.</span> <span class="nav-text">经典的线程模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在用户空间中实现线程"><span class="nav-number">3.</span> <span class="nav-text">在用户空间中实现线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在内核态实现线程"><span class="nav-number">4.</span> <span class="nav-text">在内核态实现线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#混合实现"><span class="nav-number">5.</span> <span class="nav-text">混合实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调度程序激活机制"><span class="nav-number">6.</span> <span class="nav-text">调度程序激活机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#弹出式线程"><span class="nav-number">7.</span> <span class="nav-text">弹出式线程</span></a></li></ol></div>
             
 
           </div>
