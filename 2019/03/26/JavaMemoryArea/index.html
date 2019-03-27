@@ -99,25 +99,29 @@
 
 
 
-  <meta name="description" content="插入排序的学习笔记以及代码实现">
-<meta name="keywords" content="算法">
+  <meta name="description" content="java 将内存管理的责任交给了虚拟机，但是我们应该了解 java 虚拟机里的内存大致分配，以及出现异常可能的情况，以便出现问题时更快地排查。">
+<meta name="keywords" content="JVM学习_《深入理解 java 虚拟机》">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法练习_插入排序">
-<meta property="og:url" content="http://yoursite.com/2018/10/09/insertionSort/index.html">
+<meta property="og:title" content="JVM_java内存区域">
+<meta property="og:url" content="http://yoursite.com/2019/03/26/JavaMemoryArea/index.html">
 <meta property="og:site_name" content="我是zhyee">
-<meta property="og:description" content="插入排序的学习笔记以及代码实现">
+<meta property="og:description" content="java 将内存管理的责任交给了虚拟机，但是我们应该了解 java 虚拟机里的内存大致分配，以及出现异常可能的情况，以便出现问题时更快地排查。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-27T16:31:58.552Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/26/ANDRtx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/26/AN5Yxs.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/26/AN5NMn.png">
+<meta property="og:updated_time" content="2019-03-26T06:37:58.961Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法练习_插入排序">
-<meta name="twitter:description" content="插入排序的学习笔记以及代码实现">
+<meta name="twitter:title" content="JVM_java内存区域">
+<meta name="twitter:description" content="java 将内存管理的责任交给了虚拟机，但是我们应该了解 java 虚拟机里的内存大致分配，以及出现异常可能的情况，以便出现问题时更快地排查。">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/03/26/ANDRtx.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/09/insertionSort/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/26/JavaMemoryArea/"/>
 
 
 
@@ -127,7 +131,7 @@
   };
 </script>
 
-  <title>算法练习_插入排序 | 我是zhyee</title>
+  <title>JVM_java内存区域 | 我是zhyee</title>
   
 
 
@@ -314,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/09/insertionSort/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/26/JavaMemoryArea/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhyee">
@@ -331,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">算法练习_插入排序
+          <h1 class="post-title" itemprop="name headline">JVM_java内存区域
               
             
           </h1>
@@ -356,24 +360,12 @@
                 
               
 
-              <time title="Created: 2018-10-09 23:11:11" itemprop="dateCreated datePublished" datetime="2018-10-09T23:11:11+08:00">2018-10-09</time>
+              <time title="Created: 2019-03-26 14:34:19 / Modified: 14:37:58" itemprop="dateCreated datePublished" datetime="2019-03-26T14:34:19+08:00">2019-03-26</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-10-28 00:31:58" itemprop="dateModified" datetime="2018-10-28T00:31:58+08:00">2018-10-28</time>
               
             
           </span>
@@ -392,7 +384,7 @@
           
 
           
-              <div class="post-description">插入排序的学习笔记以及代码实现</div>
+              <div class="post-description">java 将内存管理的责任交给了虚拟机，但是我们应该了解 java 虚拟机里的内存大致分配，以及出现异常可能的情况，以便出现问题时更快地排查。</div>
           
 
         </div>
@@ -408,19 +400,52 @@
       
 
       
-        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>给定无序数组，将数组按从小到大的顺序排列。</p>
-<h4 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h4><p>类比整理桥牌，将每一张桥牌插入到其他整理有序的牌中的适当位置。在数组中，当前索引左边的元素都是有序的，当需要对下一个元素进行排序时，将其插入到左边适当位置，其余元素在插入前向后移一位。可以使用辅助数组保存有序的元素。</p>
-<h1 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h1><iframe height="800" scrolling="no" title="Fancy Animated SVG Menu" src="https://visualgo.net/zh/sorting" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;"><br></iframe>
-
-
-
-
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>clojure</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> insert-sort [items]</span><br><span class="line">  (<span class="name"><span class="builtin-name">letfn</span></span> [(<span class="name">insert-item'</span> [items x]</span><br><span class="line">            (<span class="name"><span class="builtin-name">cond</span></span> (<span class="name"><span class="builtin-name">empty?</span></span> items) (<span class="name"><span class="builtin-name">list</span></span> x)</span><br><span class="line">                  (<span class="name"><span class="builtin-name">&lt;</span></span> x (<span class="name"><span class="builtin-name">first</span></span> items)) (<span class="name"><span class="builtin-name">concat</span></span> (<span class="name"><span class="builtin-name">list</span></span> x) items)</span><br><span class="line">                  <span class="symbol">:else</span> (<span class="name"><span class="builtin-name">cons</span></span> (<span class="name"><span class="builtin-name">first</span></span> items) (<span class="name">insert-item'</span> (<span class="name"><span class="builtin-name">rest</span></span> items) x))))</span><br><span class="line">          (<span class="name">insert-sort'</span> [newItems items]</span><br><span class="line">            (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">empty?</span></span> items) newItems</span><br><span class="line">                               (<span class="name">insert-sort'</span> (<span class="name">insert-item'</span> newItems (<span class="name"><span class="builtin-name">first</span></span> items)) (<span class="name"><span class="builtin-name">rest</span></span> items))))]</span><br><span class="line">    (<span class="name">insert-sort'</span> (<span class="name"><span class="builtin-name">list</span></span> (<span class="name"><span class="builtin-name">first</span></span> items)) (<span class="name"><span class="builtin-name">rest</span></span> items))))</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
-<p>java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] insertionSort(<span class="keyword">int</span>[] a) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = a[i];</span><br><span class="line">            <span class="keyword">if</span> (x &lt; a[j]) &#123;</span><br><span class="line">                System.arraycopy(a, j, a, j + <span class="number">1</span>, i - j); <span class="comment">//偏移j位</span></span><br><span class="line">                a[j] = x;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><p>插入排序所需的时间取决于数组中元素的顺序，与选择排序不同的是，选择排序会遍历数组，与数组本身比较。而插入排序会取出元素之后，与已经排好序部分的元素比较。因此如果数组本身是有序的，或者部分有序，那么插入排序要快很多。同时，插入排序也很适合小规模数组。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p>《算法》</p>
+        <h1 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h1><p>java 虚拟机的内存区域有各自的创建和销毁时间，如，栈，程序计数器依赖于线程的启动，而方法区和堆随着 java 虚拟机的启动而存在。</p>
+<p><img src="https://s2.ax1x.com/2019/03/26/ANDRtx.png" alt="ANDRtx.png"></p>
+<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器可以理解为，保存当前字节码执行的行号，cpu 按照程序计数器的指示，有序地执行代码逻辑。当线程恢复时，也需要程序计数器指示，线程被挂起前的执行位置。</p>
+<p>因此，每个线程都有一个程序计数器，来保证线程切换后的恢复。</p>
+<p>如果执行的是 native 方法，程序计数器为空。</p>
+<h3 id="java-虚拟机栈"><a href="#java-虚拟机栈" class="headerlink" title="java 虚拟机栈"></a>java 虚拟机栈</h3><p>虚拟机栈也是线程私有的区域，程序运行时，执行方法的调用之前，会将所有参数入栈，被调用的方法，按照所需要的参数个数，从栈中取用。方法调用完毕，则会出栈。</p>
+<p>异常情况</p>
+<ul>
+<li>线程请求的栈深度大于虚拟机允许的最大深度，如递归，死循环（方法迟迟无法执行完毕，参数不断入栈）</li>
+<li>动态扩展时申请不到足够的内存</li>
+</ul>
+<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>本地方法栈用于存放 native 方法的参数</p>
+<h3 id="java-堆"><a href="#java-堆" class="headerlink" title="java 堆"></a>java 堆</h3><p>用于存放对象实例，java 堆是线程共享的。<br>java 堆中的区域还能再细分，比如新生代，老年代。划分的目的主要是为了内存回收。</p>
+<p>异常情况：OOM</p>
+<ul>
+<li>内存泄露：对象得不到回收，无法释放已申请的内存空间</li>
+<li>内存溢出：申请不到足够的空间</li>
+</ul>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>与 java 堆一样，属于线程共享的区域，存放编译后的代码数据，如加载的类信息，常量，静态变量等。</p>
+<h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><p>属于方法区的一部分</p>
+<h1 id="HotSpot-虚拟机对象"><a href="#HotSpot-虚拟机对象" class="headerlink" title="HotSpot 虚拟机对象"></a>HotSpot 虚拟机对象</h1><h3 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h3><h5 id="分配方式"><a href="#分配方式" class="headerlink" title="分配方式"></a>分配方式</h5><ul>
+<li>指针碰撞：假设堆中内存规整，用过的放在一边，没用过的放另一边，那么内存的分配就是移动指针，找到一块没用的区域。</li>
+<li>空闲列表：虚拟机维护一张列表，记录哪些内存块可用。</li>
+</ul>
+<p>java 堆是否规整，取决于垃圾收集器。</p>
+<h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><ul>
+<li>对分配内存的动作进行同步处理（原子性操作）</li>
+<li>将内存分配的动作按照线程划分在不同的空间中执行</li>
+</ul>
+<h3 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h3><p>对象在内存中的布局可以分为：对象头，实例数据，对齐填充</p>
+<h5 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h5><ul>
+<li>储存运行时的自身数据，如哈希码，锁状态标志</li>
+<li>类型指针，指向元数据</li>
+</ul>
+<h5 id="实例数据"><a href="#实例数据" class="headerlink" title="实例数据"></a>实例数据</h5><p>对象真正存储的有效信息，代码中定义的各种类型的字段内容</p>
+<h5 id="对齐填充"><a href="#对齐填充" class="headerlink" title="对齐填充"></a>对齐填充</h5><p>占位符</p>
+<h3 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h3><p>对象的访问方式由虚拟机决定</p>
+<ul>
+<li>句柄：java 堆中划分出句柄池，reference 中指向句柄地址，句柄包含对象的实例数据和类型数据地址</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/03/26/AN5Yxs.png" alt="AN5Yxs.png"></p>
+<ul>
+<li>直接指针：reference 直接指向对象的实例数据，而实例数据中包含类型数据的地址</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/03/26/AN5NMn.png" alt="AN5NMn.png"></p>
+<p>使用句柄的好处是，句柄比较稳定，如果对象被移动，只需要修改句柄而不用修改 reference，使用指针的好处是速度快，节省了指针定位的时间开销。</p>
 
       
     </div>
@@ -441,7 +466,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/JVM学习-《深入理解-java-虚拟机》/" rel="tag"># JVM学习_《深入理解 java 虚拟机》</a>
           
         </div>
       
@@ -454,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/29/QuickSort/" rel="next" title="算法练习_快速排序">
-                <i class="fa fa-chevron-left"></i> 算法练习_快速排序
+              <a href="/2019/03/23/ProcessCommunication/" rel="next" title="操作系统笔记_进程间通信">
+                <i class="fa fa-chevron-left"></i> 操作系统笔记_进程间通信
               </a>
             
           </div>
@@ -464,8 +489,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/23/MergeSort/" rel="prev" title="算法练习_归并排序">
-                算法练习_归并排序 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/27/GarbageCollector/" rel="prev" title="JVM_垃圾收集器">
+                JVM_垃圾收集器 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -639,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法思想"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">算法思想</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图解"><span class="nav-number">2.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特点"><span class="nav-number">4.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#运行时数据区域"><span class="nav-number">1.</span> <span class="nav-text">运行时数据区域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序计数器"><span class="nav-number">1.0.1.</span> <span class="nav-text">程序计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java-虚拟机栈"><span class="nav-number">1.0.2.</span> <span class="nav-text">java 虚拟机栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地方法栈"><span class="nav-number">1.0.3.</span> <span class="nav-text">本地方法栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java-堆"><span class="nav-number">1.0.4.</span> <span class="nav-text">java 堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法区"><span class="nav-number">1.0.5.</span> <span class="nav-text">方法区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量池"><span class="nav-number">1.0.6.</span> <span class="nav-text">常量池</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HotSpot-虚拟机对象"><span class="nav-number">2.</span> <span class="nav-text">HotSpot 虚拟机对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存分配"><span class="nav-number">2.0.1.</span> <span class="nav-text">内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#分配方式"><span class="nav-number">2.0.1.0.1.</span> <span class="nav-text">分配方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#线程安全"><span class="nav-number">2.0.1.0.2.</span> <span class="nav-text">线程安全</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的内存布局"><span class="nav-number">2.0.2.</span> <span class="nav-text">对象的内存布局</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#对象头"><span class="nav-number">2.0.2.0.1.</span> <span class="nav-text">对象头</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实例数据"><span class="nav-number">2.0.2.0.2.</span> <span class="nav-text">实例数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对齐填充"><span class="nav-number">2.0.2.0.3.</span> <span class="nav-text">对齐填充</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的访问定位"><span class="nav-number">2.0.3.</span> <span class="nav-text">对象的访问定位</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

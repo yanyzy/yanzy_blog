@@ -99,25 +99,30 @@
 
 
 
-  <meta name="description" content="插入排序的学习笔记以及代码实现">
-<meta name="keywords" content="算法">
+  <meta name="description" content="进程间需要通信，并且最好使用一种结构良好的方式，不要使用中断。">
+<meta name="keywords" content="操作系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法练习_插入排序">
-<meta property="og:url" content="http://yoursite.com/2018/10/09/insertionSort/index.html">
+<meta property="og:title" content="操作系统笔记_进程间通信">
+<meta property="og:url" content="http://yoursite.com/2019/03/23/ProcessCommunication/index.html">
 <meta property="og:site_name" content="我是zhyee">
-<meta property="og:description" content="插入排序的学习笔记以及代码实现">
+<meta property="og:description" content="进程间需要通信，并且最好使用一种结构良好的方式，不要使用中断。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-27T16:31:58.552Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/22/A3X7Xn.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/22/A3jDEV.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/22/A8SqFP.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/23/AJcJHA.png">
+<meta property="og:updated_time" content="2019-03-23T15:10:08.791Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法练习_插入排序">
-<meta name="twitter:description" content="插入排序的学习笔记以及代码实现">
+<meta name="twitter:title" content="操作系统笔记_进程间通信">
+<meta name="twitter:description" content="进程间需要通信，并且最好使用一种结构良好的方式，不要使用中断。">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/03/22/A3X7Xn.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/09/insertionSort/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/23/ProcessCommunication/"/>
 
 
 
@@ -127,7 +132,7 @@
   };
 </script>
 
-  <title>算法练习_插入排序 | 我是zhyee</title>
+  <title>操作系统笔记_进程间通信 | 我是zhyee</title>
   
 
 
@@ -314,7 +319,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/09/insertionSort/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/23/ProcessCommunication/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhyee">
@@ -331,7 +336,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">算法练习_插入排序
+          <h1 class="post-title" itemprop="name headline">操作系统笔记_进程间通信
               
             
           </h1>
@@ -356,24 +361,12 @@
                 
               
 
-              <time title="Created: 2018-10-09 23:11:11" itemprop="dateCreated datePublished" datetime="2018-10-09T23:11:11+08:00">2018-10-09</time>
+              <time title="Created: 2019-03-23 23:09:00 / Modified: 23:10:08" itemprop="dateCreated datePublished" datetime="2019-03-23T23:09:00+08:00">2019-03-23</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-10-28 00:31:58" itemprop="dateModified" datetime="2018-10-28T00:31:58+08:00">2018-10-28</time>
               
             
           </span>
@@ -392,7 +385,7 @@
           
 
           
-              <div class="post-description">插入排序的学习笔记以及代码实现</div>
+              <div class="post-description">进程间需要通信，并且最好使用一种结构良好的方式，不要使用中断。</div>
           
 
         </div>
@@ -408,19 +401,38 @@
       
 
       
-        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>给定无序数组，将数组按从小到大的顺序排列。</p>
-<h4 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h4><p>类比整理桥牌，将每一张桥牌插入到其他整理有序的牌中的适当位置。在数组中，当前索引左边的元素都是有序的，当需要对下一个元素进行排序时，将其插入到左边适当位置，其余元素在插入前向后移一位。可以使用辅助数组保存有序的元素。</p>
-<h1 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h1><iframe height="800" scrolling="no" title="Fancy Animated SVG Menu" src="https://visualgo.net/zh/sorting" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;"><br></iframe>
-
-
-
-
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>clojure</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> insert-sort [items]</span><br><span class="line">  (<span class="name"><span class="builtin-name">letfn</span></span> [(<span class="name">insert-item'</span> [items x]</span><br><span class="line">            (<span class="name"><span class="builtin-name">cond</span></span> (<span class="name"><span class="builtin-name">empty?</span></span> items) (<span class="name"><span class="builtin-name">list</span></span> x)</span><br><span class="line">                  (<span class="name"><span class="builtin-name">&lt;</span></span> x (<span class="name"><span class="builtin-name">first</span></span> items)) (<span class="name"><span class="builtin-name">concat</span></span> (<span class="name"><span class="builtin-name">list</span></span> x) items)</span><br><span class="line">                  <span class="symbol">:else</span> (<span class="name"><span class="builtin-name">cons</span></span> (<span class="name"><span class="builtin-name">first</span></span> items) (<span class="name">insert-item'</span> (<span class="name"><span class="builtin-name">rest</span></span> items) x))))</span><br><span class="line">          (<span class="name">insert-sort'</span> [newItems items]</span><br><span class="line">            (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">empty?</span></span> items) newItems</span><br><span class="line">                               (<span class="name">insert-sort'</span> (<span class="name">insert-item'</span> newItems (<span class="name"><span class="builtin-name">first</span></span> items)) (<span class="name"><span class="builtin-name">rest</span></span> items))))]</span><br><span class="line">    (<span class="name">insert-sort'</span> (<span class="name"><span class="builtin-name">list</span></span> (<span class="name"><span class="builtin-name">first</span></span> items)) (<span class="name"><span class="builtin-name">rest</span></span> items))))</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
-<p>java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] insertionSort(<span class="keyword">int</span>[] a) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = a[i];</span><br><span class="line">            <span class="keyword">if</span> (x &lt; a[j]) &#123;</span><br><span class="line">                System.arraycopy(a, j, a, j + <span class="number">1</span>, i - j); <span class="comment">//偏移j位</span></span><br><span class="line">                a[j] = x;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><p>插入排序所需的时间取决于数组中元素的顺序，与选择排序不同的是，选择排序会遍历数组，与数组本身比较。而插入排序会取出元素之后，与已经排好序部分的元素比较。因此如果数组本身是有序的，或者部分有序，那么插入排序要快很多。同时，插入排序也很适合小规模数组。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p>《算法》</p>
+        <h2 id="竞争条件"><a href="#竞争条件" class="headerlink" title="竞争条件"></a>竞争条件</h2><p>竞争条件的含义是：两个或多个进程读写某些共享数据，而最后的结果取决于进程运行的精确时序。</p>
+<p><img src="https://s2.ax1x.com/2019/03/22/A3X7Xn.png" alt="A3X7Xn.png"></p>
+<p>如图，假设在打印机程序中，进程 A 和 B 同时决定将一个文件排队打印，A 读到 in=7（文件排队的位置）<br>，将 7 存在一个局部变量中，此时发生一次时钟中断，CPU 将进程切换到 B ，B 也读取到 in=7，并继续运行，将 7 加 1 变为 8 。而当进程 A 继续运行时，将需要打印的文件名保存在 7 的位置，直接覆盖了进程 B 保存的文件名，进程 B 将永远得不到任何打印输出。</p>
+<h2 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h2><p>要避免竞争条件，关键是要找出某种途径来阻止多个进程同时读写共享的数据。</p>
+<p>我们把对共享内存进行访问的程序片段称作临界区域或临界区，如果能够适当地安排，使得两个进程不可能同时处于临界区中，就能够避免竞争条件。为保证使用共享数据的并发进程能够正确高效地进行协作，需要满足以下 4 个条件：</p>
+<ul>
+<li>任何两个进程不能同时处于其临界区</li>
+<li>不应对 CPU 的速度和数量做任何假设</li>
+<li>临界区外运行的进程不得阻塞其他进程</li>
+<li>不得使进程无限期等待进入临界区</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/03/22/A3jDEV.png" alt="A3jDEV.png"></p>
+<h2 id="忙等待的互斥"><a href="#忙等待的互斥" class="headerlink" title="忙等待的互斥"></a>忙等待的互斥</h2><p>几种当一个进程在临界区中更新共享内存时，其他进程不会进入临界区，也不会带来任何麻烦的方案。</p>
+<h4 id="屏蔽中断"><a href="#屏蔽中断" class="headerlink" title="屏蔽中断"></a>屏蔽中断</h4><p>单处理器系统中，最简单的方法是使每个进程在刚刚进入临界区后立即屏蔽所有中断，并在要离开之前打开中断。屏蔽中断后，时钟中断也被屏蔽，CPU 只有发生时钟中断或其他中断时才会进行进程切换。</p>
+<p>这种方案的缺点是，把屏蔽中断的权力交给用户进程是不明智的，另外，如果系统是多处理器，那么将是无效的。</p>
+<h4 id="锁变量"><a href="#锁变量" class="headerlink" title="锁变量"></a>锁变量</h4><p>这种方案设想有一个共享变量（锁），初始值为 0 ，当一个进程想进入临界区，首先测试这把锁的值，如果为 0 ，怎将其设置为 1 并进入临界区，如果为 1，则等待其值变为 0 。但这种方案包含了打印机程序一样的疏漏，即当读出锁为 0 时，刚好发生进程切换。</p>
+<h4 id="严格轮换法"><a href="#严格轮换法" class="headerlink" title="严格轮换法"></a>严格轮换法</h4><p>严格轮换法使用一个变量记录轮到哪个进程进入临界区，并检查或更新内存。进程使用忙等待的方式，连续测试这个变量，直到轮到该进程。该方案要求两个进程严格地轮流进入临界区，尽管这的确避免了所有的竞争条件，但这种方式浪费 CPU 的时间，并且违法了第三条（临界区外运行的进程不得阻塞其他进程），所以通常应该避免。</p>
+<h4 id="Peterson解法"><a href="#Peterson解法" class="headerlink" title="Peterson解法"></a>Peterson解法</h4><p><a href="https://imgchr.com/i/A8SqFP" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/22/A8SqFP.png" alt="A8SqFP.png"></a></p>
+<h4 id="TSL-指令"><a href="#TSL-指令" class="headerlink" title="TSL 指令"></a>TSL 指令</h4><p>这是一种需要硬件支持的方案，执行 TSL 指令的 CPU 将锁住内存总线，以禁止其他 CPU 在本指令结束之前访问内存。与屏蔽中断不同的是，屏蔽中断无法阻止总线上的第二个处理器访问内存。</p>
+<h2 id="睡眠与唤醒"><a href="#睡眠与唤醒" class="headerlink" title="睡眠与唤醒"></a>睡眠与唤醒</h2><p><strong>Peterson解法</strong>和<strong>TSL 指令</strong>都是正确的，但它们都将导致忙等待。本质上，它们的解法是，当一个进程想进入临界区时，先检查是否允许进入，若不允许，则该进程原地等待，直到允许为止。</p>
+<p><strong>优先级反转问题</strong>：假设当前有两个进程，H 进程优先级较高，只要处于就绪状态就会运行，L 优先级较低。某一时刻，当 L 进入临界区，此时 H 处于就绪状态，准备运行，开始忙等待。然而 L 一直不被调度，则无法离开临界区，H 将永远忙等待下去。</p>
+<p>睡眠：sleep 是一个将引起调用进程阻塞的系统调用，即被挂起，直到另一个进程将其唤醒。</p>
+<p>唤醒：wakeup 系统调用，传入要被唤醒的进程。</p>
+<p>唤醒等待位：将一个 wakeup 信号发送给尚未睡眠的进程时，会导致信号丢失。加上一个唤醒等待位，当一个 wakeup 信号发送给一个清醒的进程时，将该位置 1 ，随后当该进程要睡眠时，如果唤醒等待位是 1，则将该位清除，该进程仍然保持清醒。</p>
+<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p>信号量是使用一个整型变量来累计唤醒次数，供以后使用。一个信号量的取值可以为 0（表示没有保存下来的唤醒操作）或者为正值（表示有一个或多个唤醒操作）。</p>
+<h2 id="互斥量"><a href="#互斥量" class="headerlink" title="互斥量"></a>互斥量</h2><p>如果不使用信号量的计数能力，有时可以使用信号量的简化版本：互斥量。互斥量是一个可以处于两态之一的变量：解锁和加锁。</p>
+<p>当一个线程（或进程）需要访问临界区时，如果该互斥量是解锁的，则调用线程可以自由进入该临界区。如果已经加锁，则调用线程被阻塞，直到在临界区中的线程完成并退出。如果多个线程被阻塞在该互斥量上，将随机选择一个线程并允许它获得锁。</p>
+<h2 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h2><p>一个管程是一个由过程、变量及数据结构等组成的一个集合，它们组成一个特殊的模块或软件包。进程可以在任何需要的时候调用管程中的过程，但它们不能在管程之外声明的过程中直接访问管程的数据结构。</p>
+<h2 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h2><p>消息传递适用于分布式系统中的进程通信，一个进程向另一个进程发送一条消息，接收者立马回复一条特殊消息，如果超过一定时间没有回复，则重新发送。通过在消息体中加序号标记是否是重复消息。</p>
+<p>在<strong>生产者-消费者</strong>问题中，使用<strong>信箱</strong>这个数据结构，生产者向指定信箱发送消息，当信箱满时，生产者阻塞，消费者从信箱中获取消息。（类比消息队列）</p>
+<h2 id="屏障"><a href="#屏障" class="headerlink" title="屏障"></a>屏障</h2><p>屏障适用于进程组之间，需要同时执行过程时。在某一阶段末设置屏障，每当有一个进程执行完毕这一阶段的任务，到达屏障，则被挂起，直到所有进程执行完毕，再同时进入下一阶段。</p>
+<p><img src="https://s2.ax1x.com/2019/03/23/AJcJHA.png" alt="AJcJHA.png"></p>
 
       
     </div>
@@ -441,7 +453,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
           
         </div>
       
@@ -454,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/29/QuickSort/" rel="next" title="算法练习_快速排序">
-                <i class="fa fa-chevron-left"></i> 算法练习_快速排序
+              <a href="/2019/03/21/Thread/" rel="next" title="操作系统笔记_线程">
+                <i class="fa fa-chevron-left"></i> 操作系统笔记_线程
               </a>
             
           </div>
@@ -464,8 +476,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/23/MergeSort/" rel="prev" title="算法练习_归并排序">
-                算法练习_归并排序 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/26/JavaMemoryArea/" rel="prev" title="JVM_java内存区域">
+                JVM_java内存区域 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -639,7 +651,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法思想"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">算法思想</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图解"><span class="nav-number">2.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特点"><span class="nav-number">4.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#竞争条件"><span class="nav-number">1.</span> <span class="nav-text">竞争条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#临界区"><span class="nav-number">2.</span> <span class="nav-text">临界区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#忙等待的互斥"><span class="nav-number">3.</span> <span class="nav-text">忙等待的互斥</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#屏蔽中断"><span class="nav-number">3.0.1.</span> <span class="nav-text">屏蔽中断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#锁变量"><span class="nav-number">3.0.2.</span> <span class="nav-text">锁变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#严格轮换法"><span class="nav-number">3.0.3.</span> <span class="nav-text">严格轮换法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Peterson解法"><span class="nav-number">3.0.4.</span> <span class="nav-text">Peterson解法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TSL-指令"><span class="nav-number">3.0.5.</span> <span class="nav-text">TSL 指令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#睡眠与唤醒"><span class="nav-number">4.</span> <span class="nav-text">睡眠与唤醒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量"><span class="nav-number">5.</span> <span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#互斥量"><span class="nav-number">6.</span> <span class="nav-text">互斥量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管程"><span class="nav-number">7.</span> <span class="nav-text">管程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息传递"><span class="nav-number">8.</span> <span class="nav-text">消息传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#屏障"><span class="nav-number">9.</span> <span class="nav-text">屏障</span></a></li></ol></div>
             
 
           </div>

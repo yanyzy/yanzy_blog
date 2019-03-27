@@ -99,25 +99,32 @@
 
 
 
-  <meta name="description" content="插入排序的学习笔记以及代码实现">
-<meta name="keywords" content="算法">
+  <meta name="description" content="哪些内存需要回收？什么时候回收？怎么回收？">
+<meta name="keywords" content="JVM学习_《深入理解 java 虚拟机》">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法练习_插入排序">
-<meta property="og:url" content="http://yoursite.com/2018/10/09/insertionSort/index.html">
+<meta property="og:title" content="JVM_垃圾收集器">
+<meta property="og:url" content="http://yoursite.com/2019/03/27/GarbageCollector/index.html">
 <meta property="og:site_name" content="我是zhyee">
-<meta property="og:description" content="插入排序的学习笔记以及代码实现">
+<meta property="og:description" content="哪些内存需要回收？什么时候回收？怎么回收？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-27T16:31:58.552Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/26/ANT2ss.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/27/Aaz2Ie.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/27/AdSXTO.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/27/AdPDH0.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/27/AdFnOA.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/27/AdkGAx.png">
+<meta property="og:updated_time" content="2019-03-27T10:24:56.927Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法练习_插入排序">
-<meta name="twitter:description" content="插入排序的学习笔记以及代码实现">
+<meta name="twitter:title" content="JVM_垃圾收集器">
+<meta name="twitter:description" content="哪些内存需要回收？什么时候回收？怎么回收？">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/03/26/ANT2ss.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/09/insertionSort/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/27/GarbageCollector/"/>
 
 
 
@@ -127,7 +134,7 @@
   };
 </script>
 
-  <title>算法练习_插入排序 | 我是zhyee</title>
+  <title>JVM_垃圾收集器 | 我是zhyee</title>
   
 
 
@@ -314,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/09/insertionSort/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/27/GarbageCollector/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhyee">
@@ -331,7 +338,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">算法练习_插入排序
+          <h1 class="post-title" itemprop="name headline">JVM_垃圾收集器
               
             
           </h1>
@@ -356,24 +363,12 @@
                 
               
 
-              <time title="Created: 2018-10-09 23:11:11" itemprop="dateCreated datePublished" datetime="2018-10-09T23:11:11+08:00">2018-10-09</time>
+              <time title="Created: 2019-03-27 18:23:37 / Modified: 18:24:56" itemprop="dateCreated datePublished" datetime="2019-03-27T18:23:37+08:00">2019-03-27</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-10-28 00:31:58" itemprop="dateModified" datetime="2018-10-28T00:31:58+08:00">2018-10-28</time>
               
             
           </span>
@@ -392,7 +387,7 @@
           
 
           
-              <div class="post-description">插入排序的学习笔记以及代码实现</div>
+              <div class="post-description">哪些内存需要回收？什么时候回收？怎么回收？</div>
           
 
         </div>
@@ -408,19 +403,90 @@
       
 
       
-        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>给定无序数组，将数组按从小到大的顺序排列。</p>
-<h4 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h4><p>类比整理桥牌，将每一张桥牌插入到其他整理有序的牌中的适当位置。在数组中，当前索引左边的元素都是有序的，当需要对下一个元素进行排序时，将其插入到左边适当位置，其余元素在插入前向后移一位。可以使用辅助数组保存有序的元素。</p>
-<h1 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h1><iframe height="800" scrolling="no" title="Fancy Animated SVG Menu" src="https://visualgo.net/zh/sorting" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;"><br></iframe>
-
-
-
-
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>clojure</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> insert-sort [items]</span><br><span class="line">  (<span class="name"><span class="builtin-name">letfn</span></span> [(<span class="name">insert-item'</span> [items x]</span><br><span class="line">            (<span class="name"><span class="builtin-name">cond</span></span> (<span class="name"><span class="builtin-name">empty?</span></span> items) (<span class="name"><span class="builtin-name">list</span></span> x)</span><br><span class="line">                  (<span class="name"><span class="builtin-name">&lt;</span></span> x (<span class="name"><span class="builtin-name">first</span></span> items)) (<span class="name"><span class="builtin-name">concat</span></span> (<span class="name"><span class="builtin-name">list</span></span> x) items)</span><br><span class="line">                  <span class="symbol">:else</span> (<span class="name"><span class="builtin-name">cons</span></span> (<span class="name"><span class="builtin-name">first</span></span> items) (<span class="name">insert-item'</span> (<span class="name"><span class="builtin-name">rest</span></span> items) x))))</span><br><span class="line">          (<span class="name">insert-sort'</span> [newItems items]</span><br><span class="line">            (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">empty?</span></span> items) newItems</span><br><span class="line">                               (<span class="name">insert-sort'</span> (<span class="name">insert-item'</span> newItems (<span class="name"><span class="builtin-name">first</span></span> items)) (<span class="name"><span class="builtin-name">rest</span></span> items))))]</span><br><span class="line">    (<span class="name">insert-sort'</span> (<span class="name"><span class="builtin-name">list</span></span> (<span class="name"><span class="builtin-name">first</span></span> items)) (<span class="name"><span class="builtin-name">rest</span></span> items))))</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
-<p>java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] insertionSort(<span class="keyword">int</span>[] a) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = a[i];</span><br><span class="line">            <span class="keyword">if</span> (x &lt; a[j]) &#123;</span><br><span class="line">                System.arraycopy(a, j, a, j + <span class="number">1</span>, i - j); <span class="comment">//偏移j位</span></span><br><span class="line">                a[j] = x;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><p>插入排序所需的时间取决于数组中元素的顺序，与选择排序不同的是，选择排序会遍历数组，与数组本身比较。而插入排序会取出元素之后，与已经排好序部分的元素比较。因此如果数组本身是有序的，或者部分有序，那么插入排序要快很多。同时，插入排序也很适合小规模数组。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p>《算法》</p>
+        <h2 id="判断对象是否存活"><a href="#判断对象是否存活" class="headerlink" title="判断对象是否存活"></a>判断对象是否存活</h2><h5 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h5><p>给对象添加一个引用计数器，当有一个新的引用指向这个对象，就在计数器加一，引用失效减一。计数器为 0 时，认为该对象不会被再使用。</p>
+<p>缺点：无法解决对象循环引用，如果两个对象互相引用，并且这两个对象都已不再使用。那么它们永远不会被回收。</p>
+<h5 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h5><p>使用 GC Roots 判断对象是否可达，通过一系列的”GC Roots” 对象作为起始结点，从这些结点到对象间的路径叫做引用链，当一个对象到 GC Roots 没有任何引用链，判定为可回收的对象</p>
+<p><img src="https://s2.ax1x.com/2019/03/26/ANT2ss.png" alt="ANT2ss.png"></p>
+<h5 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h5><ul>
+<li>引用划分：强引用、软引用、弱引用、虚引用</li>
+</ul>
+<h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2><h5 id="标记-清除法"><a href="#标记-清除法" class="headerlink" title="标记-清除法"></a>标记-清除法</h5><p>标记-清除法分为标记和清除两个阶段：首先在堆中标记这个对象是否应该被回收，标记完成后统一回收被标记的对象。</p>
+<p>缺点：</p>
+<ul>
+<li>标记-清除这两个过程的效率不高</li>
+<li>空间问题：清除后会产生许多不连续的内存碎片，导致后续分配大对象时，仍旧无法找到空间，再次触发 GC</li>
+</ul>
+<h5 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h5><p>将内存划分为相等的两块，当这块使用完，则把存活的对象复制到另一块。然后清理使用过的空间。</p>
+<p>缺点：将内存缩小为原来的一半</p>
+<h5 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h5><p>首先标记出需要回收的对象，再将存活的对象都向一端移动，然后直接清理其余内存。</p>
+<h5 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h5><p>根据对象的存活周期，把内存划分为几块，在不同的区域使用不同的回收算法。<br>一般是分为新生代和老年代，新生代会有大量的对象死亡，可以使用复制算法，老年代对象存活率较高，可以使用标记-清除，或者标记-整理算法。</p>
+<h2 id="HotSpot-的算法实现"><a href="#HotSpot-的算法实现" class="headerlink" title="HotSpot 的算法实现"></a>HotSpot 的算法实现</h2><h5 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h5><p>程序执行时并非在所有地方都能暂停下来执行 GC ，必须在安全点。如何在 GC 发生时，让所有线程都跑到最近的安全点：</p>
+<ul>
+<li>抢先式中断：可以理解为线程被动中断，在 GC 发生时，首先中断所有线程，如果有线程没有到达安全点，则恢复线程，使它跑到安全点</li>
+<li>主动式中断：线程主动中断，不直接对线程操作，而是设置一个中断标志，线程主动轮询这个标志，一旦发现需要中断，则自动中断挂起</li>
+</ul>
+<h5 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h5><p>指的是在一段代码内，引用关系不会发生变化，在这段区域内的任何地方都可以发生中断。</p>
+<h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><p><img src="https://s2.ax1x.com/2019/03/27/Aaz2Ie.png" alt="Aaz2Ie.png"></p>
+<h5 id="Serial-收集器"><a href="#Serial-收集器" class="headerlink" title="Serial 收集器"></a>Serial 收集器</h5><p>单线程收集器，不能与用户线程同时运行，必须暂停其他所有线程，直到收集结束。</p>
+<p><a href="https://imgchr.com/i/AdSXTO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/27/AdSXTO.png" alt="AdSXTO.png"></a></p>
+<p>优点：</p>
+<ul>
+<li>简单高效，没有线程交互的开销。</li>
+<li>在用户的应用场景中，分配给虚拟机的内存一般不会很大，因此需要收集的内存不多，通常停顿时间较短。<br>因此，仍然是 client 模式下默认的新生代收集器</li>
+</ul>
+<h5 id="ParNew-收集器"><a href="#ParNew-收集器" class="headerlink" title="ParNew 收集器"></a>ParNew 收集器</h5><p>是 Serial 收集器的多线程版本（多个 GC 线程），但在单 CPU 的环境下，因为线程交互的开销，可能比 Serial 性能更差，它默认开启的收集线程数与 CPU 数量相同。</p>
+<p><img src="https://s2.ax1x.com/2019/03/27/AdPDH0.png" alt="AdPDH0.png"></p>
+<h5 id="Parallel-Scavenge-收集器"><a href="#Parallel-Scavenge-收集器" class="headerlink" title="Parallel Scavenge 收集器"></a>Parallel Scavenge 收集器</h5><p>该收集器的关注点在于，达到一个可控制的吞吐量</p>
+<p>吞吐量 = 用户代码运行时间/（用户代码运行时间+垃圾收集时间）</p>
+<h5 id="Serial-Old-收集器"><a href="#Serial-Old-收集器" class="headerlink" title="Serial Old 收集器"></a>Serial Old 收集器</h5><p>Serial 的老年代版本，主要给 client 模式下的虚拟机使用。</p>
+<h5 id="Parallel-Old-收集器"><a href="#Parallel-Old-收集器" class="headerlink" title="Parallel Old 收集器"></a>Parallel Old 收集器</h5><p>Parallel Scavenge 的老年代版本，在注重吞吐量以及 CPU 资源敏感的场合，可以优先考虑 Parallel Scavenge + Parallel Old</p>
+<h5 id="CMS-收集器"><a href="#CMS-收集器" class="headerlink" title="CMS 收集器"></a>CMS 收集器</h5><p>以获取最短 GC 停顿时间为目标的收集器，它将垃圾收集分成了几个步骤，而其中耗时最长的步骤都可以与用户线程一起工作，因此降低了 GC 停顿时间。主要优点是：并发收集、低停顿</p>
+<p>缺点：</p>
+<ul>
+<li>无法处理“浮动垃圾”，即并发运行的用户线程产生的垃圾。</li>
+<li>使用标记-清除算法产生的空间碎片</li>
+</ul>
+<p>步骤：</p>
+<ul>
+<li>初始标记</li>
+<li>并发标记</li>
+<li>重新标记</li>
+<li>并发清理</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/03/27/AdFnOA.png" alt="AdFnOA.png"></p>
+<h5 id="G1-收集器"><a href="#G1-收集器" class="headerlink" title="G1 收集器"></a>G1 收集器</h5><p>G1 是面向服务端应用的垃圾收集器，特点如下：</p>
+<ul>
+<li>并行与并发：缩短停顿时间，达到并发</li>
+<li>分代收集：采用不同的方式收集不同对象区域</li>
+<li>空间整合：收集后会规整内存</li>
+<li>可预测的停顿：化整为零，避免全堆扫描，优先回收价值最大的区域</li>
+</ul>
+<p>步骤：</p>
+<table>
+<thead>
+<tr>
+<th>header 1</th>
+<th>header 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>row 1 col 1</td>
+<td>row 1 col 2</td>
+</tr>
+<tr>
+<td>row 2 col 1</td>
+<td>row 2 col 2</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>初始标记</li>
+<li>并发标记</li>
+<li>最终标记</li>
+<li>筛选回收</li>
+</ul>
+<p><a href="https://imgchr.com/i/AdkGAx" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/27/AdkGAx.png" alt="AdkGAx.png"></a></p>
 
       
     </div>
@@ -441,7 +507,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/JVM学习-《深入理解-java-虚拟机》/" rel="tag"># JVM学习_《深入理解 java 虚拟机》</a>
           
         </div>
       
@@ -454,8 +520,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/29/QuickSort/" rel="next" title="算法练习_快速排序">
-                <i class="fa fa-chevron-left"></i> 算法练习_快速排序
+              <a href="/2019/03/26/JavaMemoryArea/" rel="next" title="JVM_java内存区域">
+                <i class="fa fa-chevron-left"></i> JVM_java内存区域
               </a>
             
           </div>
@@ -463,10 +529,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/23/MergeSort/" rel="prev" title="算法练习_归并排序">
-                算法练习_归并排序 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -639,7 +701,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法思想"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">算法思想</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图解"><span class="nav-number">2.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特点"><span class="nav-number">4.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#判断对象是否存活"><span class="nav-number">1.</span> <span class="nav-text">判断对象是否存活</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#引用计数法"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">引用计数法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可达性分析算法"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">可达性分析算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#引用"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">引用</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集算法"><span class="nav-number">2.</span> <span class="nav-text">垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#标记-清除法"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">标记-清除法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#复制算法"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">复制算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标记-整理算法"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">标记-整理算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分代收集算法"><span class="nav-number">2.0.0.4.</span> <span class="nav-text">分代收集算法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HotSpot-的算法实现"><span class="nav-number">3.</span> <span class="nav-text">HotSpot 的算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安全点"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">安全点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安全区域"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">安全区域</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集器"><span class="nav-number">4.</span> <span class="nav-text">垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Serial-收集器"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">Serial 收集器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ParNew-收集器"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">ParNew 收集器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Parallel-Scavenge-收集器"><span class="nav-number">4.0.0.3.</span> <span class="nav-text">Parallel Scavenge 收集器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Serial-Old-收集器"><span class="nav-number">4.0.0.4.</span> <span class="nav-text">Serial Old 收集器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Parallel-Old-收集器"><span class="nav-number">4.0.0.5.</span> <span class="nav-text">Parallel Old 收集器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CMS-收集器"><span class="nav-number">4.0.0.6.</span> <span class="nav-text">CMS 收集器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#G1-收集器"><span class="nav-number">4.0.0.7.</span> <span class="nav-text">G1 收集器</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
