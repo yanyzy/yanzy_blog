@@ -99,27 +99,27 @@
 
 
 
-  <meta name="description" content="符号表的学习笔记以及代码实现">
-<meta name="keywords" content="算法">
+  <meta name="description" content="了解类文件结构是学习虚拟机的重要基础之一">
+<meta name="keywords" content="JVM学习_《深入理解 java 虚拟机》">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法练习_简单符号表">
-<meta property="og:url" content="http://yoursite.com/2018/11/08/SymbolTable/index.html">
+<meta property="og:title" content="JVM_类文件结构">
+<meta property="og:url" content="http://yoursite.com/2019/04/12/Class/index.html">
 <meta property="og:site_name" content="我是zhyee">
-<meta property="og:description" content="符号表的学习笔记以及代码实现">
+<meta property="og:description" content="了解类文件结构是学习虚拟机的重要基础之一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://s1.ax1x.com/2018/11/17/izdJsK.md.png">
-<meta property="og:updated_time" content="2018-12-21T07:57:24.733Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/04/12/AqwKA0.png">
+<meta property="og:updated_time" content="2019-04-12T14:48:09.469Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法练习_简单符号表">
-<meta name="twitter:description" content="符号表的学习笔记以及代码实现">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/11/17/izdJsK.md.png">
+<meta name="twitter:title" content="JVM_类文件结构">
+<meta name="twitter:description" content="了解类文件结构是学习虚拟机的重要基础之一">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/04/12/AqwKA0.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/08/SymbolTable/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/04/12/Class/"/>
 
 
 
@@ -129,7 +129,7 @@
   };
 </script>
 
-  <title>算法练习_简单符号表 | 我是zhyee</title>
+  <title>JVM_类文件结构 | 我是zhyee</title>
   
 
 
@@ -316,7 +316,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/08/SymbolTable/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/12/Class/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhyee">
@@ -333,7 +333,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">算法练习_简单符号表
+          <h1 class="post-title" itemprop="name headline">JVM_类文件结构
               
             
           </h1>
@@ -358,24 +358,12 @@
                 
               
 
-              <time title="Created: 2018-11-08 18:35:18" itemprop="dateCreated datePublished" datetime="2018-11-08T18:35:18+08:00">2018-11-08</time>
+              <time title="Created: 2019-04-12 22:08:24 / Modified: 22:48:09" itemprop="dateCreated datePublished" datetime="2019-04-12T22:08:24+08:00">2019-04-12</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-21 15:57:24" itemprop="dateModified" datetime="2018-12-21T15:57:24+08:00">2018-12-21</time>
               
             
           </span>
@@ -394,7 +382,7 @@
           
 
           
-              <div class="post-description">符号表的学习笔记以及代码实现</div>
+              <div class="post-description">了解类文件结构是学习虚拟机的重要基础之一</div>
           
 
         </div>
@@ -410,15 +398,24 @@
       
 
       
-        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>符号表是一种存储键值对的数据结构，主要目的是将一个键和一个值联系起来，能够将一对键值对插入符号表，并希望之后能够从符号表的所有键值对中查找一个键并返回响应的值。支持两种基本操作：</p>
+        <p>根据 java 虚拟机的规范，class 文件采用类似 c 语言结构体的伪结构来存储数据，这种伪结构只有两种数据类型：无符号数和表。</p>
 <ul>
-<li>插入(put)：将一组新的键值对存入表中。</li>
-<li>查找(get)：根据给定的键返回相应的值。</li>
+<li>无符号数属于基本数据类型，可以用来描述数字，索引引用，数量值等</li>
+<li>表是由多个无符号数或者其他表构成的复合数据类型，用于描述有层次关系的复合结构的数据</li>
 </ul>
-<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><p><a href="https://imgchr.com/i/izdJsK" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2018/11/17/izdJsK.md.png" alt="izdJsK.md.png"></a></p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>数组实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ST</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    List&lt;Object&gt; keys;</span><br><span class="line">    List&lt;Object&gt; vals;</span><br><span class="line">    <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">    ST() &#123;</span><br><span class="line">        <span class="keyword">this</span>.keys = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">this</span>.vals = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">this</span>.size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">put</span><span class="params">(K key, V val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">boolean</span> b = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; keys.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (keys.get(i).equals(key)) &#123;</span><br><span class="line">                vals.set(i, val);</span><br><span class="line">                b = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!b) &#123;</span><br><span class="line">            size++;</span><br><span class="line">            keys.add(key);</span><br><span class="line">            vals.add(val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">V <span class="title">get</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; keys.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (keys.get(i).equals(key)) &#123;</span><br><span class="line">                <span class="keyword">return</span> (V) vals.get(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; keys.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (keys.get(i).equals(key)) &#123;</span><br><span class="line">                keys.remove(i);</span><br><span class="line">                vals.remove(i);</span><br><span class="line">                size--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Object key1 : keys) &#123;</span><br><span class="line">            <span class="keyword">if</span> (key1.equals(key)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Iterable&lt;K&gt; <span class="title">keys</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (Iterable&lt;K&gt;) keys;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>链表实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SequentialSearchST</span>&lt;<span class="title">K</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;<span class="title">K</span>&gt;, <span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Node first;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (first == <span class="keyword">null</span>) &#123;</span><br><span class="line">            first = <span class="keyword">new</span> Node(key, value);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Node temp = first;</span><br><span class="line">        <span class="keyword">while</span> (temp.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (temp.key.compareTo(key) == <span class="number">0</span>) &#123;</span><br><span class="line">                temp.value = value;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (temp.key.compareTo(key) == <span class="number">0</span>) &#123;</span><br><span class="line">            temp.value = value;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        temp.next = <span class="keyword">new</span> Node(key, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">V <span class="title">get</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (first == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Node temp = first;</span><br><span class="line">        <span class="keyword">while</span> (temp.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (temp.key.compareTo(key) == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> temp.value;</span><br><span class="line">            &#125;</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (temp.key.compareTo(key) == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> temp.value;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (key.equals(first.key)) &#123;</span><br><span class="line">            first = first.next;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Node temp = first;</span><br><span class="line">        Node pre = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span> (temp.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (temp.key.compareTo(key) == <span class="number">0</span>) &#123;</span><br><span class="line">                pre.next = temp.next;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            pre = temp;</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (temp.key.compareTo(key) == <span class="number">0</span>) &#123;</span><br><span class="line">            pre.next = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">        K key;</span><br><span class="line">        V value;</span><br><span class="line">        Node next;</span><br><span class="line"></span><br><span class="line">        Node(K key, V value) &#123;</span><br><span class="line">            <span class="keyword">this</span>.key = key;</span><br><span class="line">            <span class="keyword">this</span>.value = value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="魔数与-class-文件的版本"><a href="#魔数与-class-文件的版本" class="headerlink" title="魔数与 class 文件的版本"></a>魔数与 class 文件的版本</h2><p>每个 class 文件的头 4 个字节称为魔数，它唯一的作用是确定这是否是一个被虚拟机接受的 class 文件。魔数之后的 4 个字节，存储了 class 文件的版本号，高版本的 jdk 能向下兼容以前版本，但不能运行之后的版本，即使文件内容没有丝毫改变，虚拟机也会拒绝执行。</p>
+<h2 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h2><p>版本号之后是常量池的入口，主要用于存放<strong>字面量</strong>和<strong>符号引用</strong>，java 语言在编译时并不会有连接这一步骤，而是在运行时动态连接，因此在运行时才会将符号引用转化为真正的内存地址。在 java 虚拟机运行时，需要从常量池获取符号引用。</p>
+<h2 id="访问标志"><a href="#访问标志" class="headerlink" title="访问标志"></a>访问标志</h2><p>常量池结束之后的两个字节是访问标志，用于识别类或者接口层次的访问信息，包括这个 class 是类还是接口。</p>
+<p><img src="https://s2.ax1x.com/2019/04/12/AqwKA0.png" alt="AqwKA0.png"></p>
+<h2 id="类索引，父类索引与接口索引集合"><a href="#类索引，父类索引与接口索引集合" class="headerlink" title="类索引，父类索引与接口索引集合"></a>类索引，父类索引与接口索引集合</h2><p>class 文件中由这三项数据确定类的继承关系。</p>
+<ul>
+<li>类索引用于确定这个类的全限定名</li>
+<li>父类索引用于确定这个类的父类的全限定名</li>
+<li>接口索引用于描述这个类实现了哪些接口</li>
+</ul>
+<h2 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h2><p>用于描述类或者接口中声明的变量。包含类级变量以及实例级变量，但不包含方法内的局部变量。</p>
+<h2 id="方法表集合"><a href="#方法表集合" class="headerlink" title="方法表集合"></a>方法表集合</h2><p>类比字段表集合</p>
+<h2 id="属性表集合"><a href="#属性表集合" class="headerlink" title="属性表集合"></a>属性表集合</h2><p>字段表，方法表都可以携带自己的属性表集合，用于描述有些场景专有的信息</p>
 
       
     </div>
@@ -439,7 +436,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/JVM学习-《深入理解-java-虚拟机》/" rel="tag"># JVM学习_《深入理解 java 虚拟机》</a>
           
         </div>
       
@@ -452,8 +449,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/30/BubbleSort/" rel="next" title="算法练习_冒泡排序">
-                <i class="fa fa-chevron-left"></i> 算法练习_冒泡排序
+              <a href="/2019/03/27/GarbageCollector/" rel="next" title="JVM_垃圾收集器">
+                <i class="fa fa-chevron-left"></i> JVM_垃圾收集器
               </a>
             
           </div>
@@ -461,10 +458,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/10/OrderdST/" rel="prev" title="算法练习_有序符号表">
-                算法练习_有序符号表 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -637,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#API"><span class="nav-number">2.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#魔数与-class-文件的版本"><span class="nav-number">1.</span> <span class="nav-text">魔数与 class 文件的版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常量池"><span class="nav-number">2.</span> <span class="nav-text">常量池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问标志"><span class="nav-number">3.</span> <span class="nav-text">访问标志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类索引，父类索引与接口索引集合"><span class="nav-number">4.</span> <span class="nav-text">类索引，父类索引与接口索引集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字段表集合"><span class="nav-number">5.</span> <span class="nav-text">字段表集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法表集合"><span class="nav-number">6.</span> <span class="nav-text">方法表集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性表集合"><span class="nav-number">7.</span> <span class="nav-text">属性表集合</span></a></li></ol></div>
             
 
           </div>
