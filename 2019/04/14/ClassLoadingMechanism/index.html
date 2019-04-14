@@ -107,10 +107,13 @@
 <meta property="og:site_name" content="我是zhyee">
 <meta property="og:description" content="虚拟机如何加载 Class 文件，加载后的 Class 文件又有什么变化">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-14T13:41:59.640Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/04/13/AOp6TU.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/04/14/AXGv4S.png">
+<meta property="og:updated_time" content="2019-04-14T15:04:06.372Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类加载机制">
 <meta name="twitter:description" content="虚拟机如何加载 Class 文件，加载后的 Class 文件又有什么变化">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/04/13/AOp6TU.png">
 
 
 
@@ -356,7 +359,7 @@
                 
               
 
-              <time title="Created: 2019-04-14 21:40:54 / Modified: 21:41:59" itemprop="dateCreated datePublished" datetime="2019-04-14T21:40:54+08:00">2019-04-14</time>
+              <time title="Created: 2019-04-14 21:40:54 / Modified: 23:04:06" itemprop="dateCreated datePublished" datetime="2019-04-14T21:40:54+08:00">2019-04-14</time>
             
 
             
@@ -396,7 +399,53 @@
       
 
       
-        
+        <p>在 class 文件中描述的各种信息，都要加载到虚拟机之后才能运行。</p>
+<p>类加载机制：虚拟机把描述类的数据从 class 文件加载到内存，并对数据进行校验，转换解析和初始化，最终形成可以被虚拟机直接使用的 java 类型。</p>
+<h2 id="类加载的时机"><a href="#类加载的时机" class="headerlink" title="类加载的时机"></a>类加载的时机</h2><p><img src="https://s2.ax1x.com/2019/04/13/AOp6TU.png" alt="AOp6TU.png"></p>
+<p>关于什么时候开始类加载的第一个阶段，虚拟机并没有强制规定，但是虚拟机规范严格规定了有且只有 5 种情况必须立即对类进行初始化（那么，加载，验证，准备自然需要在此之前开始）。</p>
+<p><em>解析阶段可以在初始化之后进行</em></p>
+<ul>
+<li>遇到 new 、getstatic 、putstatic、invokestatic 这 4 条字节码指令时</li>
+<li>使用 java.lang.reflect 包的方法对类进行反射调用时</li>
+<li>当初始化一个类时，如果发现其父类没有被初始化，需要先对其父类进行初始化</li>
+<li>虚拟机启动时，用户需要指定一个要执行的主类，虚拟机会初始化这个主类</li>
+<li>使用 jdk 1.5 时，如果一个 MethodHandle 实例最后的解析结果句柄所对应的类没有初始化，则先触发其初始化</li>
+</ul>
+<p>这 5 种行为称为对类的<strong>主动引用</strong>，除此之外的引用类的方式不会触发其初始化，称为<strong>被动引用</strong></p>
+<p><em>一个类在初始化的时候，要求其父类全部初始化过，但是一个接口在初始化时，并不要求其父接口全部完成初始化，只有在真正使用到父接口的时候才会初始化</em></p>
+<h2 id="类加载的过程"><a href="#类加载的过程" class="headerlink" title="类加载的过程"></a>类加载的过程</h2><h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><p>加载阶段，虚拟机需要完成三件事：</p>
+<ul>
+<li>通过一个类的全限定名来获取一个类的二进制字节流</li>
+<li>将这个字节流所代表的的静态存储结构转化为方法区的运行时数据</li>
+<li>在内存中生成一个代表这个类的 Class 对象，作为方法区这个类的各种数据访问的入口</li>
+</ul>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p>验证是连接阶段的第一步，这一步是为了保证 Class 文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全。</p>
+<p>验证大致会完成四个阶段的检验动作：</p>
+<ul>
+<li>文件格式验证：保证输入的字节流能正确地解析并存储于方法区中，格式符合要求。后面三个阶段的验证全部基于方法区的存储结构进行，不再操作字节流。</li>
+<li>元数据验证：对字节码描述的信息进行语义分析，保证其符合 java 语言规范的要求</li>
+<li>字节码验证：对类的方法体进行校验分析，保证被校验类的方法不会做出危害虚拟机安全的事件</li>
+<li>符号引用验证：确保解析动作能正常进行</li>
+</ul>
+<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>准备阶段是正式为类变量分配内存并设置初始值的阶段，这些变量所使用的内存都将在方法区分配（这里的初始值指的是 0 值，真正的赋值在初始化阶段）</p>
+<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>解析阶段是虚拟机将常量池里的符号引用替换为直接引用的过程。</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>初始化阶段，才真正执行类中定义的 java 程序代码。初始化阶段是执行类构造器方法的过程。</p>
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p>类加载器：通过一个类的全限定名，获取定义这个类的二进制字节流。</p>
+<h4 id="类与类加载器"><a href="#类与类加载器" class="headerlink" title="类与类加载器"></a>类与类加载器</h4><p>对于任意一个类，都需要由加载它的类加载器和这个类本身一同确立其在 java 虚拟机中的唯一性。即使两个类来自于用一个 class 文件，由同一虚拟机加载，只要加载它们的类加载器不同，那这两个类就必定不想等。</p>
+<h4 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h4><p>从 java 虚拟机的角度来讲，只存在两种不同的类加载器：</p>
+<ul>
+<li>启动类加载器 （Bootstrap ClassLoader)：使用 c++ 语言实现，是虚拟机自身的一部分</li>
+<li>其他所有类加载器：由 java 语言实现，独立于虚拟机外部，全部继承自 java.lang.ClassLoader</li>
+</ul>
+<p>从开发人员的角度讲，大致可以分为三种类加载器：</p>
+<ul>
+<li>启动类加载器：加载 \lib 目录，并且被虚拟机识别的类库，无法被 java 程序直接使用。</li>
+<li>扩展类加载器：负责加载 \lib\ext 目录中的类库</li>
+<li>应用程序类加载器：也称为系统类加载器，负责加载用户路径指定的类库，一般是默认的类加载器</li>
+</ul>
+<p><a href="https://imgchr.com/i/AXGv4S" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/04/14/AXGv4S.png" alt="AXGv4S.png"></a></p>
+<p>双亲委派模型：要求除启动类加载器以外，所有类加载器都有其父类加载器。其工作过程是：当一个类加载器收到了加载类的请求，首先自己不会尝试去加载这个类，而是把这个请求委派给父类加载器，每个类加载器都如此，因此所有加载请求都将最终传送到顶层的启动类加载器，只有当父类加载器反馈自己无法加载这个类，子加载器才尝试自己去加载。</p>
+
       
     </div>
 
@@ -486,8 +535,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -591,6 +649,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载的时机"><span class="nav-number">1.</span> <span class="nav-text">类加载的时机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载的过程"><span class="nav-number">2.</span> <span class="nav-text">类加载的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#加载"><span class="nav-number">2.0.1.</span> <span class="nav-text">加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#验证"><span class="nav-number">2.0.2.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#准备"><span class="nav-number">2.0.3.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解析"><span class="nav-number">2.0.4.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化"><span class="nav-number">2.0.5.</span> <span class="nav-text">初始化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载器"><span class="nav-number">3.</span> <span class="nav-text">类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类与类加载器"><span class="nav-number">3.0.1.</span> <span class="nav-text">类与类加载器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双亲委派模型"><span class="nav-number">3.0.2.</span> <span class="nav-text">双亲委派模型</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
