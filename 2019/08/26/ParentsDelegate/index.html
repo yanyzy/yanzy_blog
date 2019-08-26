@@ -99,27 +99,27 @@
 
 
 
-  <meta name="description" content="暴力子字符串查找算法的学习笔记以及代码实现">
-<meta name="keywords" content="算法">
+  <meta name="description" content="记录一个由于没有理解双亲委派机制而产生的 bug">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法练习_暴力子字符串查找算法">
-<meta property="og:url" content="http://yoursite.com/2019/01/28/Brute/index.html">
+<meta property="og:title" content="双亲委派机制的真实案例">
+<meta property="og:url" content="http://yoursite.com/2019/08/26/ParentsDelegate/index.html">
 <meta property="og:site_name" content="我是zhyee">
-<meta property="og:description" content="暴力子字符串查找算法的学习笔记以及代码实现">
+<meta property="og:description" content="记录一个由于没有理解双亲委派机制而产生的 bug">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://s2.ax1x.com/2019/01/28/kK5Kne.png">
-<meta property="og:updated_time" content="2019-01-28T03:53:02.000Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/26/mR4hKe.jpg">
+<meta property="og:updated_time" content="2019-08-26T03:14:17.072Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法练习_暴力子字符串查找算法">
-<meta name="twitter:description" content="暴力子字符串查找算法的学习笔记以及代码实现">
-<meta name="twitter:image" content="https://s2.ax1x.com/2019/01/28/kK5Kne.png">
+<meta name="twitter:title" content="双亲委派机制的真实案例">
+<meta name="twitter:description" content="记录一个由于没有理解双亲委派机制而产生的 bug">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/26/mR4hKe.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/28/Brute/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/08/26/ParentsDelegate/"/>
 
 
 
@@ -129,7 +129,7 @@
   };
 </script>
 
-  <title>算法练习_暴力子字符串查找算法 | 我是zhyee</title>
+  <title>双亲委派机制的真实案例 | 我是zhyee</title>
   
 
 
@@ -316,7 +316,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/28/Brute/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/ParentsDelegate/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhyee">
@@ -333,7 +333,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">算法练习_暴力子字符串查找算法
+          <h1 class="post-title" itemprop="name headline">双亲委派机制的真实案例
               
             
           </h1>
@@ -358,7 +358,7 @@
                 
               
 
-              <time title="Created: 2019-01-28 11:34:47 / Modified: 11:53:02" itemprop="dateCreated datePublished" datetime="2019-01-28T11:34:47+08:00">2019-01-28</time>
+              <time title="Created: 2019-08-26 10:02:05 / Modified: 11:14:17" itemprop="dateCreated datePublished" datetime="2019-08-26T10:02:05+08:00">2019-08-26</time>
             
 
             
@@ -377,8 +377,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/01/28/Brute/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2019/01/28/Brute/" itemprop="commentCount"></span>
+                <a href="/2019/08/26/ParentsDelegate/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2019/08/26/ParentsDelegate/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -386,7 +386,7 @@
 
           
           
-             <span id="/2019/01/28/Brute/" class="leancloud_visitors" data-flag-title="算法练习_暴力子字符串查找算法">
+             <span id="/2019/08/26/ParentsDelegate/" class="leancloud_visitors" data-flag-title="双亲委派机制的真实案例">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -403,7 +403,7 @@
           
 
           
-              <div class="post-description">暴力子字符串查找算法的学习笔记以及代码实现</div>
+              <div class="post-description">记录一个由于没有理解双亲委派机制而产生的 bug</div>
           
 
         </div>
@@ -419,11 +419,34 @@
       
 
       
-        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h3 id="子字符串查找"><a href="#子字符串查找" class="headerlink" title="子字符串查找"></a>子字符串查找</h3><p>给定长为 N 的文本，以及长为 M 的模式，在字符串中查找匹配该模式的子字符串，例如我们常用的 ctrl+f 查找。模式相对于文本是很短的。</p>
-<h3 id="暴力子字符串查找"><a href="#暴力子字符串查找" class="headerlink" title="暴力子字符串查找"></a>暴力子字符串查找</h3><p>子字符串查找有一个简单而广泛的暴力法，它在最坏的情况下运行时间与 MN 成正比。该方法是在文本中模式可能出现的任何地方进行匹配检查。当检查到符合模式的第一个字符时，依次检查后续字符，若后续某一字符不匹配，则将计数置零，从当前字符重新进行匹配。</p>
-<h1 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h1><p><img src="https://s2.ax1x.com/2019/01/28/kK5Kne.png" alt="kK5Kne.png"></p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Brute</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(String pat, String txt)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> N = pat.length();</span><br><span class="line">        <span class="keyword">int</span> M = txt.length();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= M - N; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> j;</span><br><span class="line">            <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">                <span class="comment">//如果不匹配则重新计数</span></span><br><span class="line">                <span class="keyword">if</span> (pat.charAt(j) != txt.charAt(i + j)) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//全部匹配成功，返回索引</span></span><br><span class="line">            <span class="keyword">if</span> (j == N) &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> M;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p>《算法》</p>
+        <h2 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h2><p>双亲委派是 JAVA 类加载器加载类的一种机制，其工作方式是：当需要加载一个类时，这个类加载器首先会<strong>递归地</strong>委托其父加载器去加载，当父加载器找不到这个类时，才尝试自己去加载。</p>
+<p>也就是说，类加载器，也有父子关系，如图所示（截图取自《深入理解 JAVA 虚拟机》）</p>
+<p><img src="https://s2.ax1x.com/2019/08/26/mR4hKe.jpg" alt="mR4hKe.jpg"></p>
+<p>其中，Bootstrap ClassLoader 是顶层的启动类加载器，除它之外，所有的类加载器都有自己的父加载器。</p>
+<h2 id="案例分享"><a href="#案例分享" class="headerlink" title="案例分享"></a>案例分享</h2><h4 id="bug-表现"><a href="#bug-表现" class="headerlink" title="bug 表现"></a>bug 表现</h4><p>最近的工作中，使用了 java agent 获取应用的部分数据，包括一些 spring 的信息，具体方式可以参考<a href="https://zhyee.top/2019/07/17/use-spring-context-without-spring/" target="_blank" rel="noopener">java探针技术II——如何在不依赖 spring 的情况下，使用 spring</a>。因此，agent 的 jar 包中是未引入 spring 相关的任何包的，代码中使用到相关类时，会采用 Class.forName() API。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="string">"org.springframework.core.env.EnumerablePropertySource"</span>);</span><br></pre></td></tr></table></figure>
+<p>这个 API 有很多异常需要捕获，包括 ClassNotFoundException，不过通常情况下不会发生。</p>
+<p>本地运行时，agent 附着到一个 springboot 框架的简单应用中，并运行完好，没有异常。而奇怪的是，当部署到公司平台的容器中，这段代码会报错 ClassNotFoundException。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2019-08-26 10:34:39 5f849f8c7d-6zj9g-dev_bf93ce3b-c4bd-11e9-a3b2-0242ac120003_0 ERROR: reflect error: java.lang.ClassNotFoundException:</span><br><span class="line">org.springframework.core.env.EnumerablePropertySource</span><br></pre></td></tr></table></figure>
+<h4 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h4><p>一开始理所当然地认为，是不是 jar 包没有正确地打包到容器中，或者被覆盖之类的情况。虽然我认为，如果 jar 包真的出问题（spring-core)，那么应该会直接运行不了。而当时的表现是，除了使用这一部分代码的地方，其余运行完好，没有任何报错。</p>
+<p>还是顺着这个方向排查了，首先在本地容器化运行，成功复现 bug。</p>
+<p>进入本地容器中，查看该 jar 包，的确存在，没有问题。</p>
+<p>本地 jar 包运行，也复现了这个 bug。</p>
+<p>到这里为止似乎没有了头绪，然后灵光一闪突然回归到这个错误本身 ClassNotFoundException，这是出现在类加载器加载类时，找不到这个 class。而已经检查过 class 没有问题了，或许是类加载器的问题呢。</p>
+<h4 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h4><p>双亲委派机制其实一直都知道，说起来也知道工作原理，可是仿佛并未真正理解。</p>
+<p>一开始没有想到这个问题，也是由于，第一次写 java agent，虽然知道跟普通 java 应用有区别，但本地没有报错似乎就觉得没有问题了，同时没有把探针与类加载器挂上钩。</p>
+<p>想到这里之后，首先去查询了<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/instrument/package-summary.html" target="_blank" rel="noopener">官方文档</a>，看到这样一句话</p>
+<blockquote>
+<p>The agent class will be loaded by the system class loader (see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/ClassLoader.html#getSystemClassLoader(" target="_blank" rel="noopener"><code>ClassLoader.getSystemClassLoader</code></a>)).</p>
+</blockquote>
+<p>系统类加载器就是上图中的应用程序类加载器，由于这个类加载器是 ClassLoader 中的 getSystemClassLoader() 的返回值，因此也被称为系统类加载器。</p>
+<p>接下来，只要获取加载 spring 框架的类加载器，就可以得到答案了。</p>
+<p>在报错代码前加上如下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Logger.info(<span class="string">"agent class loader is [&#123;&#125;]"</span>, <span class="keyword">this</span>.getClass().getClassLoader());</span><br><span class="line">Logger.info(<span class="string">"spring class loader is [&#123;&#125;]"</span>, ApplicationContextHolder.applicationContextObj.getClass().getClassLoader());</span><br></pre></td></tr></table></figure>
+<p><em>ApplicationContextHolder.applicationContextObj 是当 spring 加载成功后，获取到的 spring context ，保存在静态变量中</em></p>
+<h5 id="本地运行时得到结果"><a href="#本地运行时得到结果" class="headerlink" title="本地运行时得到结果"></a>本地运行时得到结果</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">···</span><br><span class="line">INFO: spring class loader is [sun.misc.Launcher$AppClassLoader@18b4aac2]</span><br><span class="line">INFO: agent class loader is [sun.misc.Launcher$AppClassLoader@18b4aac2]</span><br><span class="line">···</span><br></pre></td></tr></table></figure>
+<h5 id="jar-包运行时得到结果"><a href="#jar-包运行时得到结果" class="headerlink" title="jar 包运行时得到结果"></a>jar 包运行时得到结果</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">···</span><br><span class="line">INFO: agent class loader is [sun.misc.Launcher<span class="variable">$AppClassLoader</span>@18b4aac2]</span><br><span class="line">INFO: spring class loader is [org.springframework.boot.loader.LaunchedURLClassLoader@6156496]</span><br><span class="line">···</span><br></pre></td></tr></table></figure>
+<p>联合双亲委派机制的工作原理得到结论，在本地运行时，由于 agent 与 spring 的类加载器是一样的，因此不会出现 ClassNotFoundException 这个异常。而在 jar 包运行时，由于 spring-core 是以额外的 jar 引入的，使用了 URLClassLoader ，它的级别比 AppClassLoader 低。所以 agent 在寻找这个类时，只会递归委托其父类加载器加载，而不会向下得到其子类加载器加载的类，因此也就出现异常了。</p>
 
       
     </div>
@@ -444,7 +467,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -457,8 +480,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/16/TST/" rel="next" title="算法练习_三向单词查找树">
-                <i class="fa fa-chevron-left"></i> 算法练习_三向单词查找树
+              <a href="/2019/08/16/SubnetMask/" rel="next" title="如何理解子网掩码">
+                <i class="fa fa-chevron-left"></i> 如何理解子网掩码
               </a>
             
           </div>
@@ -466,10 +489,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/23/关于micometer统计最长gc时间为0的问题排查/" rel="prev" title="关于micrometer统计最长gc时间为0的问题排查">
-                关于micrometer统计最长gc时间为0的问题排查 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -651,7 +670,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#子字符串查找"><span class="nav-number">1.0.1.</span> <span class="nav-text">子字符串查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暴力子字符串查找"><span class="nav-number">1.0.2.</span> <span class="nav-text">暴力子字符串查找</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图解"><span class="nav-number">2.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#双亲委派机制"><span class="nav-number">1.</span> <span class="nav-text">双亲委派机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例分享"><span class="nav-number">2.</span> <span class="nav-text">案例分享</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bug-表现"><span class="nav-number">2.0.1.</span> <span class="nav-text">bug 表现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排查过程"><span class="nav-number">2.0.2.</span> <span class="nav-text">排查过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决思路"><span class="nav-number">2.0.3.</span> <span class="nav-text">解决思路</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#本地运行时得到结果"><span class="nav-number">2.0.3.1.</span> <span class="nav-text">本地运行时得到结果</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jar-包运行时得到结果"><span class="nav-number">2.0.3.2.</span> <span class="nav-text">jar 包运行时得到结果</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
